@@ -1,25 +1,29 @@
 import React,{useState}from "react";
-import { Link } from "react-router-dom";
-
+import { Link, useNavigate } from "react-router-dom";
 
 const Login = () => {
     const [username, setUsername] = useState("");
     const [password, setPassword] = useState("");
+    const navigate = useNavigate();
+
     const SignInHandleClick=()=>{
-        if (username && password) {
-           // de inlocuit cu logica reala
-            if (username === "user" && password === "pass") {
-              alert("Autentificare reușită!");
-              // Navigare catre Home
-            } else {
-              alert("Login failed. Invalid credintials.");
-            }
-          } else if(username) {
-            alert("Input password.");
+    
+      if (username && password) {
+          // de inlocuit cu logica reala
+          if (username === "user" && password === "pass") {
+            
+            // Navigare catre Home
+            navigate("/home");
+
+          } else {
+            alert("Login failed. Invalid credintials.");
           }
-          else{
-            alert('Input username')
-          }   
+        } else if(username) {
+          alert("Input password.");
+        }
+        else{
+          alert('Input username')
+        }   
     }
 
   return (
