@@ -1,52 +1,78 @@
-import React,{useState}from "react";
-import { Link, useNavigate } from "react-router-dom";
+import React, { useState } from "react";
+import { NavLink, useNavigate } from "react-router-dom";
+import { signInWithEmailAndPassword } from "firebase/auth";
+import { auth } from "../../Firebase";
 
 const Login = () => {
-    const [username, setUsername] = useState("");
-    const [password, setPassword] = useState("");
-    const navigate = useNavigate();
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const navigate = useNavigate();
+  const [errorMessage,setErrorMessage]=useState("");
 
-    const SignInHandleClick=()=>{
-    
-      if (username && password) {
-          // de inlocuit cu logica reala
-          if (username === "user" && password === "pass") {
-            
-            // Navigare catre Home
-            navigate("/home");
-
-          } else {
-            alert("Login failed. Invalid credintials.");
-          }
-        } else if(username) {
-          alert("Input password.");
-        }
-        else{
-          alert('Input username')
-        }   
-    }
+  const SignInHandleSubmit = async (e) => {
+    e.preventDefault();
+    signInWithEmailAndPassword(auth, email, password)
+      .then((userCredential) => {
+        // Signed in
+        const user = userCredential.user;
+        navigate("/home");
+        console.log(user);
+      })
+      .catch((error) => {
+        const errorCode = error.code;
+        const message = error.message;
+        console.log(errorCode, message);
+        setErrorMessage(message)
+        setEmail("");
+        setPassword("");
+      });
+  };
 
   return (
-    <div class='d-flex justify-content-center'>
-    <div class='card col-sm-10 col-md-8 col-lg-6'>
-      <h1 class='d-flex justify-content-center'>Login</h1>
-      <label for="userNameFormControl" class="form-label mt-2 ">UserName</label>
-      <input type="text" class="form-control" id="userNameFormControl" placeholder="UserName"
-      value={username} onChange={(e)=>setUsername(e.target.value)}/>
+    <div className="d-flex justify-content-center">
+      <div className="card col-sm-10 col-md-8 col-lg-6">
+        <h1 className="d-flex justify-content-center">Login</h1>
+        <form onSubmit={SignInHandleSubmit}>
+          <label htmlFor="emailFormControl" className="form-label mt-2 ">
+            Email
+          </label>
+          <input
+            type="text"
+            className="form-control"
+            id="emailFormControl"
+            placeholder="Email"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+            required
+          />
 
-      <label for="passwordFormControl" class="form-label mt-2">Password</label>
-      <input type="password" class="form-control" id="passwordFormControl" placeholder="***" value={password}
-      onChange={(e)=>setPassword(e.target.value)}/>
+          <label htmlFor="passwordFormControl" className="form-label mt-2">
+            Password
+          </label>
+          <input
+            type="password"
+            className="form-control"
+            id="passwordFormControl"
+            placeholder="*****"
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+            required
+          />
 
-      <div class='d-flex justify-content-center'>
-      <button onClick={SignInHandleClick} class="btn btn-primary col-11 mt-2 " type="button">Sign In</button>
+          {errorMessage && <div style={{ color: "red"}}>{errorMessage}</div>}
+
+          <div className="d-flex justify-content-center">
+            <button className="btn btn-primary col-11 mt-2 " type="submit">
+              Sign In
+            </button>
+          </div>
+          <div className="card-footer mt-3">
+            <NavLink to="/signup" className="btn btn-success col-12 mt-2">
+              Create a new account
+            </NavLink>
+          </div>
+        </form>
       </div>
-      <div class='card-footer mt-3'>
-      <Link to="/signup" className="btn btn-success col-12 mt-2">
-          Create a new account
-        </Link>
-      </div>
-    </div>
     </div>
   );
 };
