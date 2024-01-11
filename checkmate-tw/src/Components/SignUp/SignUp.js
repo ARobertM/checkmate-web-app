@@ -20,19 +20,16 @@ const SignUp = () => {
         const user = userCredential.user;
         console.log(user);
         navigate("/signin");
-        // ...
+        
       })
       .catch((error) => {
         const errorCode = error.code;
         const errorMessage = error.message;
         console.log(errorCode, errorMessage);
-        // ..
+      
       });
 
-    // Aici poți adăuga logica pentru gestionarea datelor introduse
-    // De exemplu, poți trimite aceste date către un API pentru a crea un cont
 
-    // Și/sau poți reseta starea formularului după trimiterea cu succes a datelor
     setFirstName("");
     setLastName("");
     setEmail("");
@@ -52,7 +49,7 @@ const SignUp = () => {
               type="text"
               className="form-control"
               id="firstNameFormControl"
-              placeholder="Nume"
+              placeholder="First name"
               value={firstName}
               onChange={(e) => setFirstName(e.target.value)}
               required
@@ -66,7 +63,7 @@ const SignUp = () => {
               type="text"
               className="form-control"
               id="lastNameFormControl"
-              placeholder="Prenume"
+              placeholder="Last name"
               value={lastName}
               onChange={(e) => setLastName(e.target.value)}
               required
