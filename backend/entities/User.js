@@ -21,7 +21,7 @@ const User = db.define('User', {
         allowNull : false,
     },
     UserRole : {
-        type : Sequelize.STRING,
+        type : Sequelize.ENUM('ORGANIZATOR', 'PARTICIPANT'),
         allowNull : false,
     }
 })

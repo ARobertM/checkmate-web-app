@@ -12,7 +12,7 @@ const db = new Sequelize({
     //host daca avem mai multe date
     define : {
         timestamps : true, //aici era pe fals dar vedem ca si noi avem nevoie de timestamp-urile din tabela
-        freezeTableName : true,
+        freezeTableName : true, //daca schimbam baza de date 
     }
 }
 )
