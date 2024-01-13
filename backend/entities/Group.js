@@ -13,7 +13,11 @@ const Group = db.define('Group', {
     UserId: {
         type : Sequelize.INTEGER,
         allowNull : false,
-    }
+    },
+    EventId: {
+        type : Sequelize.INTEGER,
+        allowNull : false,
+    },
 })
 
 export default Group;
