@@ -1,0 +1,73 @@
+/* Adaugă acest cod în App.css */
+
+/* Stiluri generale pentru font și aliniere */
+body {
+    font-family: 'Roboto', 'Helvetica', 'Arial', sans-serif;
+    color: #333;
+  }
+  
+  /* Stilizează selectul */
+  select {
+    padding: 10px;
+    margin: 10px 0;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+  }
+  
+  /* Container pentru detalii eveniment */
+  .event-details {
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    padding: 20px;
+    margin-top: 10px;
+  }
+  
+  /* Titlu eveniment */
+  .event-details h3 {
+    color: #1a73e8; /* Culoare similară cu Zoom */
+    margin-bottom: 10px;
+  }
+  
+  /* Paragrafe pentru detalii eveniment */
+  .event-details p {
+    margin: 5px 0;
+    line-height: 1.6;
+  }
+  
+  /* Stil pentru status */
+  .status-open {
+    color: green;
+  }
+  
+  .status-closed {
+    color: red;
+  }
+
+  /* Stilurile pentru cardul evenimentului */
+.event-card {
+    background-color: #f5f5f5;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+    padding: 20px;
+    margin: 10px 0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  
+  .event-card h3 {
+    font-size: 1.2em;
+    color: #333;
+    margin: 0;
+  }
+  
+  .event-time {
+    font-size: 0.9em;
+    color: #555;
+  }
+  
+  
+  
+
+
+

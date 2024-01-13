@@ -1,83 +1,251 @@
 .add-event-container {
-    background-color: #fff;
-    border-radius: 8px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
-    color: #333;
-    max-width: 600px;
-    margin: 20px auto;
-    padding: 20px;
-  }
-
-  .add-event-header {
-    background-color: #eee;
-    padding: 10px;
-    margin: -20px -20px 20px -20px;
-    border-radius: 8px 8px 0 0;
-    font-weight: bold;
-    text-align: center;
-  }
-
-  .add-event-row {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 20px;
-  }
-
-  .add-event-time, .add-event-duration {
-    padding: 5px 10px;
-    background-color: #f1f1f1;
-    border-radius: 4px;
-  }
-
-  .add-event-duration {
-    background-color: #0078d7;
-    color: white;
-  }
-
-  .add-event-repeat, .add-event-end, .add-event-notice, .add-event-attendees {
-    margin-bottom: 15px;
-  }
-
-  .add-event-repeat select, .add-event-end select, .add-event-repeat input, .add-event-end input {
-    margin-left: 10px;
-  }
-
-  .add-event-attendees input {
-    width: 100%;
-    padding: 5px;
-    margin-top: 5px;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-  }
-
-  .add-event-actions {
-    display: flex;
-    justify-content: space-between;
+  background-color: #fff;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  color: #333;
+  max-width: 600px;
+  margin: 20px auto;
+  padding: 20px;
 }
 
-.add-event-actions button {
-padding: 10px 20px;
-border: none;
-border-radius: 4px;
-background-color: #0078d7;
-color: white;
-cursor: pointer;
+/* Stilizare pentru containerul dropdown și input pentru repetare eveniment */
+.add-event-repeat {
+  display: flex;
+  align-items: center;
+  justify-content: start;
+  margin-bottom: 20px; /* sau orice altă valoare pentru a obține spațiul dorit */
 }
 
+/* Stilizare pentru dropdown */
+.add-event-repeat select {
+  padding: 8px 12px;
+  border: 1px solid #ccc; /* ajustează grosimea după preferință */
+  border-radius: 4px;
+  background-color: #fff;
+  margin-right: 8px; /* spațiu între select și input */
+}
+
+/* Stilizare pentru input de tip text pentru numărul de zile */
+.add-event-repeat input[type="text"] {
+  padding: 8px 12px;
+  border: 1px solid #ccc; /* ajustează grosimea după preferință */
+  border-radius: 4px;
+  width: 50px; /* sau orice altă valoare care este potrivită */
+}
+
+/* Stilizare pentru label-ul "day(s)" */
+.add-event-repeat .days-label {
+  margin-left: 8px; /* spațiu după input */
+  color: #333; /* sau orice culoare este potrivită */
+}
+
+/* Acest stil este pentru a păstra consecvența cu restul designului */
+
+/* Stilizare pentru input-ul de tip text pentru numărul de zile */
+.add-event-repeat input[type="text"] {
+  padding: 8px 12px;
+  border: 1px solid #ccc; /* ajustează grosimea după preferință */
+  border-radius: 4px;
+  width: 50px; /* sau orice altă valoare care este potrivită */
+}
+
+/* Stilizare pentru label-ul "day(s)" */
+.add-event-repeat .days-label {
+  margin-left: 8px; /* spațiu după input */
+  color: #333; /* sau orice culoare este potrivită */
+}
+
+/* Ajustări pentru responsive */
+@media (max-width: 768px) {
+  .add-event-repeat {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .add-event-repeat select,
+  .add-event-repeat input[type="text"] {
+    width: 100%; /* Pentru a se extinde pe toată lățimea la ecrane mici */
+    margin-right: 0;
+    margin-bottom: 10px; /* Spațiu între elemente când sunt stivuite */
+  }
+  
+  .add-event-repeat .days-label {
+    margin-left: 0;
+  }
+}
+
+
+.add-event-header {
+  background-color: #f5f5f5;
+  padding: 10px;
+  margin: -20px -20px 20px -20px;
+  border-radius: 8px 8px 0 0;
+  font-weight: bold;
+  text-align: center;
+}
+
+.add-event-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 20px;
+}
+
+.add-event-time, .add-event-duration {
+  padding: 8px 12px;
+  background-color: #e6e6e6;
+  border-radius: 4px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.add-event-duration {
+  background-color: #035ec6;
+  color: white;
+  margin-left: 8px;
+}
+
+.add-event-notice {
+  color: red;
+}
+
+.react-datepicker-wrapper {
+  width: auto;
+}
+
+.custom-input {
+  background-color: #e6e6e6;
+  border: none;
+  padding: 8px 12px;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.add-event-time input[type="time"] {
+  border: none;
+  background-color: transparent;
+  margin: 0 5px;
+}
+
+.to-text {
+  margin: 0 5px;
+  color: #333;
+}
+
+/* Stiluri pentru butoanele de acțiuni ale evenimentului */
+.add-event-actions {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+}
+
+/* Stilizarea butonului "More Options" */
 .add-event-actions button:first-child {
-background-color: transparent;
-color: #0078d7;
-text-decoration: underline;
+  background-color: transparent;
+  color: #0057b8;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  text-decoration: underline;
+  transition: background-color 0.3s ease;
 }
 
-.add-event-chat {
+.add-event-actions button:first-child:hover {
+  background-color: #e6e6e6; /* Culoarea de hover pentru "More Options" */
+}
+
+/* Stilizarea butonului "Save" */
+.add-event-buttons button {
+  background-color: #2D8CFF;
+  color: white;
+  padding: 10px 20px;
+  font-size: 16px;
+  border: none;
+  border-radius: 4px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.add-event-buttons button:hover {
+  background-color: #1C73E8;
+  transform: translateY(-2px);
+  box-shadow: 0px 5px 12px rgba(0, 0
+, 0, 0.2);
+}
+
+.add-event-buttons button:active {
+transform: translateY(1px);
+box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.2);
+}
+
+/* Stiluri pentru opțiunile suplimentare care apar când se selectează "More Options" */
+.more-options {
+background-color: #f1f1f1;
+padding: 20px;
+border-radius: 4px;
+margin-top: 10px; 
+}
+
+.more-options label {
+display: block;
+margin-bottom: 10px;
+}
+
+.more-options input[type="checkbox"] {
+margin-right: 5px;
+}
+
+/* Stilizare pentru input-ul de descriere a evenimentului */
+.add-event-attendees input {
+width: 100%;
+padding: 8px 12px;
+border: 1px solid #ccc;
+border-radius: 4px;
+background-color: #fff;
+margin-bottom: 20px;
+}
+
+/* Stilizare pentru checkbox-ul de chat */
+.add-event-chat label {
 display: flex;
 align-items: center;
-margin-bottom: 15px;
+cursor: pointer;
 }
 
 .add-event-chat input[type="checkbox"] {
 margin-right: 10px;
+}
+
+.add-event-notice {
+font-size: 0.9em;
+color: #666;
+}
+
+/* Ajustări pentru responsive */
+@media (max-width: 768px) {
+.add-event-container {
+width: 90%;
+max-width: none;
+}
+
+.add-event-row,
+.add-event-actions {
+flex-direction: column;
+}
+
+.add-event-time input[type="time"],
+.add-event-duration,
+.add-event-actions button {
+width: 100%;
+margin-bottom: 10px;
+}
+
+.add-event-actions button:first-child {
+margin-bottom: 0;
+}
 }
