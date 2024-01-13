@@ -1,0 +1,83 @@
+.add-event-container {
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    color: #333;
+    max-width: 600px;
+    margin: 20px auto;
+    padding: 20px;
+  }
+
+  .add-event-header {
+    background-color: #eee;
+    padding: 10px;
+    margin: -20px -20px 20px -20px;
+    border-radius: 8px 8px 0 0;
+    font-weight: bold;
+    text-align: center;
+  }
+
+  .add-event-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+  }
+
+  .add-event-time, .add-event-duration {
+    padding: 5px 10px;
+    background-color: #f1f1f1;
+    border-radius: 4px;
+  }
+
+  .add-event-duration {
+    background-color: #0078d7;
+    color: white;
+  }
+
+  .add-event-repeat, .add-event-end, .add-event-notice, .add-event-attendees {
+    margin-bottom: 15px;
+  }
+
+  .add-event-repeat select, .add-event-end select, .add-event-repeat input, .add-event-end input {
+    margin-left: 10px;
+  }
+
+  .add-event-attendees input {
+    width: 100%;
+    padding: 5px;
+    margin-top: 5px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+  }
+
+  .add-event-actions {
+    display: flex;
+    justify-content: space-between;
+}
+
+.add-event-actions button {
+padding: 10px 20px;
+border: none;
+border-radius: 4px;
+background-color: #0078d7;
+color: white;
+cursor: pointer;
+}
+
+.add-event-actions button:first-child {
+background-color: transparent;
+color: #0078d7;
+text-decoration: underline;
+}
+
+.add-event-chat {
+display: flex;
+align-items: center;
+margin-bottom: 15px;
+}
+
+.add-event-chat input[type="checkbox"] {
+margin-right: 10px;
+}
