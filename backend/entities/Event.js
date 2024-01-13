@@ -20,14 +20,14 @@ const Event = db.define('Event', {
         allowNull : false,
     },
     EventStatus : {
-        type : Sequelize.ENUM('ORGANIZATOR', 'PARTICIPANT'),
+        type : Sequelize.ENUM('OPEN', 'CLOSED'),
         allowNull : false,
     },
     EventCodAccess : {
         type : Sequelize.STRING,
         allowNull : false,
     },
-    UserId: {
+    GroupId: {
         type : Sequelize.INTEGER,
         allowNull : false,
     }
