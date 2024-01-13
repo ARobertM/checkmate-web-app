@@ -27,17 +27,12 @@ function create_db(){
 
 function FK_Config(){
     // 1-n
-    User.hasMany(Event, { as: 'Evenimente', foreignKey: 'UserId' });
-    Event.belongsTo(User, { foreignKey: 'UserId' });
+    Group.hasMany(Event, { as: 'Evenimente', foreignKey: 'EventId' });
+    Event.belongsTo(Group, { foreignKey: 'GroupId' });
 
-    User.hasMany(Group, { as: 'Grupuri', foreignKey: 'UserId' });
-    Group.belongsTo(User, { foreignKey: 'UserId' });
-
-    Event.belongsToMany(EventGroup, { through: 'EventGroupEvent', as: 'GrupuriEvenimente', foreignKey: 'EventId' });
-    EventGroup.belongsToMany(Event, { through: 'EventGroupEvent', as: 'Evenimente', foreignKey: 'EventGroupId' });
-
-    Event.hasOne(AttendanceList, { as: 'ListaParticipare', foreignKey: 'EventId' });
-    AttendanceList.belongsTo(Event, { as: 'Eveniment', foreignKey: 'EventId' });
+    // --------------------- asociere n-n -------------------------------------
+    Event.belongsToMany(User, {through: "AttendanceList", as : "Users", foreignKey: "EventId"});
+    User.belongsToMany(Event, {through: "AttendanceList", as : "Events", foreignKey: "UserId"});
 
 }
 
