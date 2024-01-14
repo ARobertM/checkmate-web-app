@@ -11,7 +11,7 @@ const db = new Sequelize({
     logging : false,
     //host daca avem mai multe date
     define : {
-        timestamps : true, //aici era pe fals dar vedem ca si noi avem nevoie de timestamp-urile din tabela
+        timestamps : false, //aici era pe fals dar vedem ca si noi avem nevoie de timestamp-urile din tabela
         freezeTableName : true, //daca schimbam baza de date 
     }
 }

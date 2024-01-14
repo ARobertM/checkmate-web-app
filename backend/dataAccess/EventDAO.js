@@ -1,22 +1,19 @@
 import Event from "../entities/Event.js"
-import User from "../entities/User.js"
-//+ altii ca sa facem query-uri (sem 9)
 
-
-async function getEvent(){
-    return await Event.findAll({include : ["Evenimente"]});
+async function getAllEvents(){
+    return await Event.findAll();
 }
 
 async function getEventById(id){
-    return await Event.findByPk(id, {include : ["Evenimente"]});
+    return await Event.findByPk(id);
 }
 
 async function createEvent(event){
-    return await Event.create(event, {include : [{model : User, as : "Evenimente"}]});
+    return await Event.create(event);
 }
 
 export {
-    getEvent,
+    getAllEvents,
     getEventById,
     createEvent
 }
