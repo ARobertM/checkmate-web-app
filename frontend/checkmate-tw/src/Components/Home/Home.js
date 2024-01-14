@@ -5,9 +5,11 @@ const Home = () => {
 
   return (
     <div className="container">
-      <div className="container-navbar">
-         
-      </div>
+      
+
+         <img className="logo" src='/logo_checkmate.png'></img>
+
+      
     </div>
   );
 };
