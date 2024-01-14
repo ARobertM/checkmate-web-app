@@ -247,15 +247,13 @@ body {
   
   
 	.green-button {
-  
-	  
-	  background-color: #00ff00;
-	  color: white;
+	  background-color: #c0f8c0;
+	  color: rgb(94, 240, 80);
 	  border: none;
 	  cursor: pointer;
-	  font-size: 20px;
+	  font-size: 50px;
 	  padding: 15px 30px;
-	  border-radius: 5px;
+	  border-radius: 100px;
 	  transition: background-color 0.3s;
 	  outline: none;
 	  position: relative;
@@ -265,6 +263,7 @@ body {
 
 	.green-button:hover {
 	  background-color: #00cc00;
+	  color: white;
   }
 	
 	.green-button:hover::before {
@@ -279,23 +278,26 @@ body {
   
 	.popup {
 		display: none; /* Inițial, pop-up-ul este ascuns */
-		position: fixed; /* Poziția fixă față de viewport */
-		left: 50%; /* Centrat orizontal */
+		position: absolute; /* Poziția fixă față de viewport */
+		left: 50%; /*Centrat orizontal */
 		top: 50%; /* Centrat vertical */
-		transform: translate(-50%, -50%); /* Ajustează poziția pentru centrare exactă */
-		width: 80%; /* Lățimea pop-up-ului */
-		max-width: 500px; /* Lățimea maximă pentru a nu fi prea mare pe ecrane mari */
-		padding: 20px; /* Padding în interiorul pop-up-ului */
+		transform: translate(-50%, -50%); /*Ajustează poziția pentru centrare exactă */
+		width: 100%; 
+		max-width: 500px; 
+		padding: 20px; 
 		background: #fff; /* Fundal alb */
 		box-shadow: 0 5px 15px rgba(0,0,0,0.3); /* Umbra pentru aspectul ridicat */
 		z-index: 1000; /* Asigură-te că se află deasupra altor elemente */
 	   
-	border-radius: 10px; /* Rotunjirea colțurilor pentru estetică */
+		border-radius: 30px; /* Rotunjirea colțurilor pentru estetică */
 	}
   
   
   .popup-visible {
-	  display: block;
-	
+	  display: flex;
+	  justify-content: center;
+	  align-items: center;
+	  top: 50%;
+	  left: 50%;
   }
 
