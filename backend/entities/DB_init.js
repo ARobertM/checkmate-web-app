@@ -2,7 +2,7 @@ import mysql from "mysql2/promise";
 import env from 'dotenv';
 import AttendanceList from "./AttendanceList.js";
 import Event from "./Event.js";
-import EventGroup from "./EventsGroup.js";
+
 import Group from "./Group.js";
 import User from "./User.js";
 
@@ -27,8 +27,16 @@ function create_db(){
 
 function FK_Config(){
     // 1-n
-    Group.hasMany(Event, { as: 'Evenimente', foreignKey: 'EventId' });
+    Group.hasMany(Event, { as: 'Evenimente', foreignKey: 'GroupId' });
     Event.belongsTo(Group, { foreignKey: 'GroupId' });
+
+    //1-n pentru a vedea ce user a creat un event
+    User.hasMany(Event,{as:'Evenimente',foreignKey:'UserId'});
+    Event.belongsTo(User, { foreignKey: 'UserId' });
+
+    //1-n pentru a vedea ce user a creat un grup
+    User.hasMany(Group,{as:'Grupuri',foreignKey:'UserId'});
+    Group.belongsTo(User, { foreignKey: 'UserId' });
 
     // --------------------- asociere n-n -------------------------------------
     Event.belongsToMany(User, {through: "AttendanceList", as : "Users", foreignKey: "EventId"});
