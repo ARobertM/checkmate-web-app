@@ -1,5 +1,7 @@
 .add-event-container {
-  background-color: #fff;
+
+  background-color: rgba(255, 255, 255, 0.5);
+  opacity: 1; /* Modificați opacitatea la 1 pentru a face conținutul vizibil */
   border-radius: 8px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
@@ -7,6 +9,22 @@
   max-width: 600px;
   margin: 20px auto;
   padding: 20px;
+  position: absolute; /* Faceți ca pop-up-ul să fie poziționat absolut pentru a se așeza în partea de jos și în stânga */
+  bottom: 20px; /* Distanța de jos */
+  left: 20px; /* Distanța de stânga */
+  z-index: 999; /* Afișați pop-up-ul peste restul conținutului */
+
+}
+
+.close-button {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+  font-size: 20px;
+  color: #333;
 }
 
 /* Stilizare pentru containerul dropdown și input pentru repetare eveniment */

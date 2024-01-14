@@ -5,7 +5,7 @@ import './AddEventStyle.css';
 
 
 
-function AddEvent() {
+function AddEvent(props) {
     const [startDate, setStartDate] = useState(new Date()); // data eventtt
     const [startTime, setStartTime] = useState(""); // ora start
     const [endTime, setEndTime] = useState(""); // ora final
@@ -55,7 +55,8 @@ function AddEvent() {
     
     return (
         <div className="add-event-container">
-            
+             <button className="close-button" onClick={props.onClose}>X</button> 
+           
             <div className="add-event-header">
                 Adaugă o întâlnire:
             </div>

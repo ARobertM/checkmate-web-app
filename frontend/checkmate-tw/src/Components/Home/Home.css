@@ -12,7 +12,15 @@ body {
 .pricipal-container{
 	display: flex;
 	justify-content: start;
+	flex-direction: column;
+	align-items: flex-start;
 }
+.add-event-container {
+	position: absolute; /* Faceți ca pop-up-ul să fie poziționat absolut pentru a se așeza în partea de jos și în stânga */
+	bottom: 20px; /* Distanța de jos */
+	left: 20px; /* Distanța de stânga */
+	z-index: 999; /* Afișați pop-up-ul peste restul conținutului */
+  }
 
 @keyframes gradient {
 	0% {
@@ -114,66 +122,180 @@ body {
   }
 
 
-  .green-button{
-	margin-top: -160px;
-	margin-bottom: 190px;
-	font-family: 'Poppins';
-  }
-
-  /* Button.css */
-/* Button.css */
-.green-button {
-	background-color: transparent;
-	font-size: 20px;
-	color: white;
-	border: none;
-	outline: none;
-	cursor: pointer;
-	position: relative;
-	width: 50px; /* Ajustați dimensiunile butonului */
-	height: 50px; /* Ajustați dimensiunile butonului */
-	border-radius: 50%; /* Faceți butonul rotund */
-	overflow: hidden;
-	transition: background-color 0.3s ease-in-out; /* Efect de tranziție pentru culoarea de fundal */
+  @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap');
+  @import url('https://fonts.googleapis.com/css2?family=Kanit:ital,wght@1,600&display=swap');
+  
+  body {
+	  background: linear-gradient(-45deg, #f7f5f5, #a1a1a1, #252525,
+	  #030303,#000000);
+	  background-size: 400% 400%;
+	  animation: gradient 15s ease infinite;
+	  height: 100vh;
   }
   
-  .green-button::before {
-	content: "";
-	background: rgba(0, 255, 0, 0.5); /* Culoare verde cu opacitate */
-	position: absolute;
-	top: 0;
-	left: 0;
-	width: 100%;
-	height: 100%;
-	filter: blur(20px); /* Efect de blur */
-	z-index: -1; /* Punem fundalul sub buton */
-	transition: filter 0.3s ease-in-out; /* Efect de tranziție pentru filtrul de blur */
+  .pricipal-container{
+	  display: flex;
+	  justify-content: start;
+	  flex-direction: column;
+	  align-items: flex-start;
+  }
+  .add-event-container {
+	  position: absolute; /* Faceți ca pop-up-ul să fie poziționat absolut pentru a se așeza în partea de jos și în stânga */
+	  bottom: 20px; /* Distanța de jos */
+	  left: 20px; /* Distanța de stânga */
+	  z-index: 999; /* Afișați pop-up-ul peste restul conținutului */
+	}
+  
+  @keyframes gradient {
+	  0% {
+		  background-position: 0% 50%;
+	  }
+	  50% {
+		  background-position: 100% 50%;
+	  }
+	  100% {
+		  background-position: 0% 50%;
+	  }
+  }
+  .logo{
+	  padding-top: 10px;
+	  width: 200px;
+	  border-radius: 30px;
+  }
+  .title-text{
+	  color: white;
+	  font-family: 'Poppins';
+	  font-size: 40px;
+  }
+  .title-checkmate{
+	  font-family: 'Kanit';
+	  font-size: 60px;
+	  color: white;
+  }
+  .title-description{
+	  display: flex;
+	  justify-content: center;
   }
   
-  .green-button:hover {
-	background-color: rgba(0, 255, 0, 0.2); /* Culoarea de fundal la hover */
+  .btn-sign-in {
+	  margin-top: -160px;
+	  margin-bottom: 190px;
+	  margin-left: 100px;
+	  border-radius: 20px;
+	  padding: 10px 20px;
+	  border: 2px solid #000;
+	  background-color: #fff; 
+	  color: #000; 
+	  font-size: 16px;
+	  transition: background-color 0.3s, color 0.3s; 
+	  cursor: pointer;
+	  text-align: center;
+	  text-decoration: none;
+	  display: inline-block;
+	  font-family: 'Poppins';
+	}
+	
+	
+  .btn-about-us {
+	  margin-top: -160px;
+	  margin-bottom: 190px;
+	  margin-left: 30px;
+	  border-radius: 20px;
+	  padding: 10px 20px;
+	  border: 2px solid #000;
+	  background-color: #fff; 
+	  color: #000; 
+	  font-size: 16px;
+	  transition: background-color 0.3s, color 0.3s; 
+	  cursor: pointer;
+	  text-align: center;
+	  text-decoration: none;
+	  display: inline-block;
+	  font-family: 'Poppins';
+   }
+   .btn-about-us:hover {
+	  background-color: #000; 
+	  color: #fff; 
+	  border: 2px solid white;
+	}
+  
+	
+	.btn-sign-in:hover {
+	  background-color: #000; 
+	  color: #fff; 
+	  border: 2px solid white;
+	}
+  
+	.linie{
+	  color: white;
+	  border: 2px solid white;
+	  margin-right: 400px;
+	}
+	.loggin-as{
+	  font-family: 'Poppins';
+	  margin-top: -150px;
+	  font-size: 16px;
+	  color: white;
+	  margin-left: 250px;
+	}
+	.container-evenimente{
+	  display: flex;
+	  justify-content: center;
+	  margin-top: 170px;
+	  margin-top: 170px;
+	}
+  
+  
+	.green-button {
+  
+	  
+	  background-color: #00ff00;
+	  color: white;
+	  border: none;
+	  cursor: pointer;
+	  font-size: 20px;
+	  padding: 15px 30px;
+	  border-radius: 5px;
+	  transition: background-color 0.3s;
+	  outline: none;
+	  position: relative;
+	  overflow: hidden;
   }
   
-  .green-button:hover::before {
-	filter: blur(10px); /* Efect de blur la hover */
+
+	.green-button:hover {
+	  background-color: #00cc00;
   }
+	
+	.green-button:hover::before {
+	  filter: blur(10px); /* Efect de blur la hover */
+	}
+	
+	.plus-icon {
+	  color: white; /* Culoarea textului pentru iconul "+" */
+	  font-size: 24px;
+	}
   
-  .plus-icon {
-	color: white; /* Culoarea textului pentru iconul "+" */
-	font-size: 24px;
+  
+	.popup {
+		display: none; /* Inițial, pop-up-ul este ascuns */
+		position: fixed; /* Poziția fixă față de viewport */
+		left: 50%; /* Centrat orizontal */
+		top: 50%; /* Centrat vertical */
+		transform: translate(-50%, -50%); /* Ajustează poziția pentru centrare exactă */
+		width: 80%; /* Lățimea pop-up-ului */
+		max-width: 500px; /* Lățimea maximă pentru a nu fi prea mare pe ecrane mari */
+		padding: 20px; /* Padding în interiorul pop-up-ului */
+		background: #fff; /* Fundal alb */
+		box-shadow: 0 5px 15px rgba(0,0,0,0.3); /* Umbra pentru aspectul ridicat */
+		z-index: 1000; /* Asigură-te că se află deasupra altor elemente */
+	   
+	border-radius: 10px; /* Rotunjirea colțurilor pentru estetică */
+	}
+  
+  
+  .popup-visible {
+	  display: block;
+	
   }
-  
-
-  
-
-
-
-
-
-
-
-
-
-
-
 
