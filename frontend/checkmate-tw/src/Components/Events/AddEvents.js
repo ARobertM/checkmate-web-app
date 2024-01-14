@@ -10,12 +10,22 @@ function AddEvent() {
     const [startTime, setStartTime] = useState(""); // ora start
     const [endTime, setEndTime] = useState(""); // ora final
     const [repeatDays, setRepeatDays] = useState(0);
+    const [moreOptionsOpen, setMoreOptionsOpen] = useState(false);
+    const [selectedOption, setSelectedOption] = useState(""); 
+    const [repeatOption, setRepeatOption] = useState("Never");
+
+
+
 
     const CustomInput = forwardRef(({ value, onClick }, ref) => (
         <button className="custom-input" onClick={onClick} ref={ref}>
             {value}
         </button>
     ));
+
+    const toggleMoreOptions = () => {
+        setMoreOptionsOpen(!moreOptionsOpen);
+    }
 
     const calculateDuration = () => {
         if (startTime && endTime) {
@@ -45,10 +55,15 @@ function AddEvent() {
     
     return (
         <div className="add-event-container">
+            
             <div className="add-event-header">
-                Adauga o întâlnire:
+                Adaugă o întâlnire:
             </div>
             <div className="add-event-body">
+            <div className="add-event-attendees">
+                    Nume eveniment:
+                    <input type="text" placeholder="Introduceți numele evenimentului:" />
+                </div>
                 <div className="add-event-row">
 
                 <div className="add-event-time">
@@ -61,15 +76,17 @@ function AddEvent() {
                         <input
                             type="time"
                             value={startTime}
+                            defaultValue="10:00"
                             onChange={(e) => setStartTime(e.target.value)}
                         />{" "}
-                        PM to{" "}
+                         to{" "}
                         <input
                             type="time"
                             value={endTime}
+                            defaultValue="12:00"
                             onChange={(e) => setEndTime(e.target.value)}
                         />{" "}
-                        PM
+                        
                     </div>
                     <div className="add-event-duration">
                         {calculateDuration()}
@@ -78,35 +95,75 @@ function AddEvent() {
                 </div>
                 <div className="add-event-repeat">
                     Repeat
-                    <select>
-                        <option>Never</option>
-                        <option>Daily</option>s
+                    <select
+                        value={repeatOption}
+                        onChange={(e) => setRepeatOption(e.target.value)}
+                    >
+                        <option value="Never">Never</option>
+                        <option value="Daily">Daily</option>
                     </select>
-                       every
-                    <input type="number" min="0"
-                    value={repeatDays}
-                    onChange={(e) => setRepeatDays(e.target.value)} defaultValue="0" /> day(s)
-                </div>
+                       {repeatOption === "Daily" && (
+                        <div>
+                            every
+                            <input
+                            type="number"
+                            min="0"
+                            value={repeatDays}
+                            onChange={(e) => setRepeatDays(e.target.value)}
+                            defaultValue="0"
+                            />{" "}
+                            day(s)
+                        </div>
+                        )}
+
+                    
+                    </div>
              
-                <div className="add-event-notice">
-                    Întâlnirea ta va avea loc timp de {repeatDays} de la: {startTime}.
-                </div>
+                    <div className="add-event-notice">
+                    Întâlnirea ta va avea loc timp de {repeatOption === "Never" ? 1 : repeatDays } zile, de la ora: {startTime} la {endTime}.
+                    </div>
+
                 <div className="add-event-attendees">
-                    Attendees
-                    <input type="text" placeholder="Email or name" />
+                    Descriere eveniment:
+                    <input type="text" placeholder="Topice eveniment:" />
                 </div>
-                <div className="add-event-chat">
-                    <label>
-                        <input type="checkbox" />
-                        Enable Continuous Meeting Chat
-                    </label>
-                </div>
+
+
                 <div className="add-event-actions">
-                    <button>More Options</button>
-                    <button>Save</button>
+                    <button onClick={toggleMoreOptions}>More Options</button>
+                    {moreOptionsOpen && (
+                        <div className="more-options">
+                            <label>
+                                <input
+                                type="radio"
+                                name="meetingOption"
+                                value="Open"
+                                checked={selectedOption === "Open"}
+                                onChange={() => setSelectedOption("Open")}
+                                />
+                                Public
+                            </label>
+                            <label>
+                            <input
+                            type="radio"
+                            name="meetingOption"
+                            value="Closed"
+                            checked={selectedOption === "Closed"}
+                            onChange={() => setSelectedOption("Closed")}
+                            />
+                            Private
+                        </label>
+                        </div>
+                        )}
+          <div className="add-event-buttons">
+                <button>Save</button>
+                    </div>
                 </div>
+
             </div>
+            
         </div>
+        
     );
 }
 
