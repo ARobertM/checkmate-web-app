@@ -7,6 +7,11 @@ import { faPlus } from '@fortawesome/free-solid-svg-icons';
 
 const Home = () => {
   const [showPopup, setShowPopup] = useState(false);
+  const [eventData, setEventData] = useState(null); // State pentru stocarea datelor evenimentului
+
+  const handleSaveEvent = (data) => {
+    setEventData(data);
+  };
 
   return (
     <div className="container">
@@ -29,7 +34,18 @@ const Home = () => {
             <FontAwesomeIcon icon={faPlus} />
           </button>
         </div>
-        {showPopup && <AddEvent onClose={() => setShowPopup(false)} />}
+        {showPopup && <AddEvent onSave={handleSaveEvent} onClose={() => setShowPopup(false)} />}
+        {/* Afișarea datelor evenimentului salvat */}
+        {eventData && (
+          <div className="event-data">
+            <h2>Detalii eveniment:</h2>
+            <p>Nume eveniment: {eventData.eventName}</p>
+            <p>Data: {eventData.eventDate}</p>
+            {/* <p>Ora de început: {eventData.startTime}</p>
+            <p>Ora de sfârșit: {eventData.endTime}</p> */}
+            {/* Afișați și alte detalii ale evenimentului */}
+          </div>
+        )}
       </div>
     </div>
   );

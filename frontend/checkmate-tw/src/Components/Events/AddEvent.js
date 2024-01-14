@@ -51,7 +51,14 @@ function AddEvent(props) {
         return "";
     };
 
-      const formatTime = (date) => date.toLocaleTimeString([], { timeStyle: 'short' });
+    const formatTime = (date) => date.toLocaleTimeString([], { timeStyle: 'short' });
+    const handleSave = () => {
+        const eventData = {
+            eventName: "Nume eveniment",
+            eventDate: startDate.toDateString(),
+        };
+        props.onSave(eventData);
+    };
     
     return (
         <div className="add-event-container">
