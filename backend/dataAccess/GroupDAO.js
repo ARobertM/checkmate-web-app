@@ -1,29 +1,48 @@
 import Group from "../entities/Group.js";
 
-async function getAllGroups(){
-    return await Group.findAll();
+async function getAllGroups() {
+  try {
+    const groups = await Group.findAll();
+    return { success: true, groups: groups };
+  } catch (error) {
+    console.error("Eroare :", error);
+    return { success: false };
+  }
 }
 
-async function getGroupById(id){
-    return await Group.findByPk(id);
+async function getGroupById(id) {
+  try {
+    const group = await Group.findByPk(id);
+    return { success: true, group: group };
+  } catch (error) {
+    console.error("Eroare :", error);
+    return { success: false };
+  }
 }
 
-async function createGroup(group){
-    return await Group.create(group);
+async function createGroup(group) {
+  try {
+    const group = await Group.create(group);
+    return { success: true, group: group };
+  } catch (error) {
+    console.error("Eroare :", error);
+    return { success: false };
+  }
 }
 
 //select pe toate grupurile create de un anumit user
-async function getGroupsByUserId(userId){
-    return await Group.findAll({
-        where: {
-            UserId:userId,
-        },
-      });
+async function getGroupsByUserId(userId) {
+  try {
+    const groups = await Group.findAll({
+      where: {
+        UserId: userId,
+      },
+    });
+    return { success: true, groups: groups };
+  } catch (error) {
+    console.error("Eroare :", error);
+    return { success: false };
+  }
 }
 
-export {
-    getAllGroups,
-    getGroupById,
-    createGroup,
-    getGroupsByUserId
-}
+export { getAllGroups, getGroupById, createGroup, getGroupsByUserId };

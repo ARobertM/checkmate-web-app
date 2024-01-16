@@ -6,7 +6,7 @@ async function getAllEvents() {
     return { success: true, events: events };
   } catch (error) {
     console.error("Eroare :", error);
-    return { success: false, message: error };
+    return { success: false};
   }
 }
 
@@ -16,7 +16,7 @@ async function getEventById(id) {
     return { success: true, event: event };
   } catch (error) {
     console.error("Eroare :", error);
-    return { success: false, message: error };
+    return { success: false};
   }
 }
 
@@ -27,7 +27,7 @@ async function createEvent(event) {
     return { success: true, event: createdEvent };
   } catch (error) {
     console.error("Eroare :", error);
-    return { success: false, message: error };
+    return { success: false };
   }
 }
 
@@ -42,7 +42,7 @@ async function getEventsByUserId(userId) {
     return { success: true, events: events };
   } catch (error) {
     console.error("Eroare :", error);
-    return { success: false, message: error };
+    return { success: false };
   }
 }
 
@@ -58,7 +58,7 @@ async function getEventsByGroup(groupId) {
     return { success: true, events: events };
   } catch (error) {
     console.error("Eroare :", error);
-    return { success: false, message: error };
+    return { success: false};
   }
 }
 

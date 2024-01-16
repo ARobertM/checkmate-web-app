@@ -1,27 +1,48 @@
 import User from "../entities/User.js";
 
-async function getAllUsers(){
-    return await User.findAll();
+//de adaugat try-catch
+
+async function getAllUsers() {
+  try {
+    const users = await User.findAll();
+    return { success: true, users: users };
+  } catch (error) {
+    console.error("Eroare :", error);
+    return { success: false };
+  }
 }
 
-async function getUserById(id){
-    return await User.findByPk(id);
+async function getUserById(id) {
+  try {
+    const user = await User.findByPk(id);
+    return { success: true, user: user };
+  } catch (error) {
+    console.error("Eroare :", error);
+    return { success: false };
+  }
 }
 
-async function createUser(user){
-    return await User.create(user);
+async function createUser(user) {
+  try {
+    const user = await User.create(user);
+    return { success: true, user: user };
+  } catch (error) {
+    console.error("Eroare :", error);
+    return { success: false };
+  }
 }
-async function getUserByEmail(email){
-    return await User.findAll({
-        where: {
-            UserEmail:email,
-        },
-      });
+async function getUserByEmail(email) {
+  try {
+    const users = await User.findAll({
+      where: {
+        UserEmail: email,
+      },
+    });
+    return { success: true, users: users };
+  } catch (error) {
+    console.error("Eroare :", error);
+    return { success: false };
+  }
 }
 
-export {
-    getAllUsers,
-    getUserById,
-    createUser,
-    getUserByEmail
-}
+export { getAllUsers, getUserById, createUser, getUserByEmail };
