@@ -2,30 +2,39 @@ import React, { useState } from "react";
 import { NavLink, useNavigate } from "react-router-dom";
 import { signInWithEmailAndPassword } from "firebase/auth";
 import { auth } from "../../Firebase";
+import axios from "axios";
 
 const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const navigate = useNavigate();
-  const [errorMessage,setErrorMessage]=useState("");
+  const [errorMessage, setErrorMessage] = useState("");
 
   const SignInHandleSubmit = async (e) => {
     e.preventDefault();
-    signInWithEmailAndPassword(auth, email, password)
-      .then((userCredential) => {
-        // Signed in
-        const user = userCredential.user;
-        navigate("/home");
-        console.log(user);
-      })
-      .catch((error) => {
-        const errorCode = error.code;
-        const message = error.message;
-        console.log(errorCode, message);
-        setErrorMessage(message)
-        setEmail("");
-        setPassword("");
-      });
+    try {
+      await signInWithEmailAndPassword(auth, email, password);
+
+      const response = await axios.get(
+        "http://localhost:9000/api/user/email/" + email
+      );
+      const rol = response.data.users[0].UserRole;
+      // console.log("rol:" + response.data.users[0].UserRole);
+
+      if (rol === "ORGANIZATOR") {
+        navigate("/manager");
+      }
+      if (rol === "PARTICIPANT") {
+        navigate("/user");
+      }
+    } catch (error) {
+      const errorCode = error.code;
+      const message = error.message;
+      console.log(errorCode, message);
+      setErrorMessage(message);
+      setEmail("");
+      setPassword("");
+    }
   };
 
   return (
@@ -59,7 +68,7 @@ const Login = () => {
             required
           />
 
-          {errorMessage && <div style={{ color: "red"}}>{errorMessage}</div>}
+          {errorMessage && <div style={{ color: "red" }}>{errorMessage}</div>}
 
           <div className="d-flex justify-content-center">
             <button className="btn btn-primary col-11 mt-2 " type="submit">

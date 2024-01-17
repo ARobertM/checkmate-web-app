@@ -2,32 +2,42 @@ import React, { useState } from "react";
 import { NavLink, useNavigate } from "react-router-dom";
 import { createUserWithEmailAndPassword } from "firebase/auth";
 import { auth } from "../../Firebase";
+import axios from "axios";
 
 const SignUp = () => {
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [role,setRole]=useState("");
   const navigate = useNavigate();
 
   // Funcția pentru gestionarea evenimentului de trimitere a formularului
   const handleSignUp = async (e) => {
     e.preventDefault();
-
+try{
     await createUserWithEmailAndPassword(auth, email, password)
-      .then((userCredential) => {
-        // Signed in
-        const user = userCredential.user;
-        console.log(user);
-        navigate("/signin");
+    const response=await axios.post(
+      "http://localhost:9000/api/user",
+      {
+        UserFirstName: firstName,
+        UserLastName: lastName,
+        UserEmail: email,
+        UserRole:role 
+      }
+    );
         
-      })
-      .catch((error) => {
+       console.log(response.data)
+        navigate("/signin");
+}
+        
+      
+      catch(error) {
         const errorCode = error.code;
         const errorMessage = error.message;
         console.log(errorCode, errorMessage);
       
-      });
+      };
 
 
     setFirstName("");
@@ -101,9 +111,9 @@ const SignUp = () => {
             <label htmlFor="selectRole" className="form-label">
               Role
             </label>
-            <select className="form-select" id="selectRole">
-              <option value="1">Participant</option>
-              <option value="2">Event organizer</option>
+            <select className="form-select" id="selectRole" onChange={(e)=>setRole(e.target.value)}>
+              <option value="PARTICIPANT">Participant</option>
+              <option value="ORGANIZATOR">Event organizer</option>
             </select>
           </div>
           <div className="d-flex justify-content-center">

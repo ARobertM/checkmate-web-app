@@ -6,10 +6,12 @@ import eventRouter from "./routes/EventRouter.js";
 import userRouter from "./routes/UserRouter.js";
 import groupRouter from "./routes/GroupRouter.js";
 import attendaceRouter from "./routes/AttendaceListRouter.js";
+import cors from 'cors'
 
 let app = express();
 
 env.config();
+app.use(cors())
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
