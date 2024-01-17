@@ -1,5 +1,6 @@
 // Home.js
 import React, { useState } from "react";
+import { Link } from "react-router-dom";
 import "./Home.css";
 import AddEvent from "../Events/AddEvent";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -24,7 +25,7 @@ const Home = () => {
             <span className="title-checkmate">Checkmate</span>
             <span className="loggin-as">User: </span>
             {/* de adaugat state cu user-ul sa-i apara numele */}
-            <button className="btn-sign-in">Sign Out</button>
+            <Link to="/signin" className="btn-sign-in">Sign In</Link>
             <button className="btn-about-us">About Us</button>
           </div>
           <hr className="linie" />
