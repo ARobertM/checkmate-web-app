@@ -1,6 +1,6 @@
 import User from "../entities/User.js";
-
-//de adaugat try-catch
+import AttendanceList from "../entities/AttendanceList.js";
+import Event from "../entities/Event.js";
 
 async function getAllUsers() {
   try {
@@ -24,8 +24,8 @@ async function getUserById(id) {
 
 async function createUser(user) {
   try {
-    const user = await User.create(user);
-    return { success: true, user: user };
+    const userCreated = await User.create(user);
+    return { success: true, user: userCreated };
   } catch (error) {
     console.error("Eroare :", error);
     return { success: false };
@@ -44,5 +44,33 @@ async function getUserByEmail(email) {
     return { success: false };
   }
 }
+//select pentru toti userii care participa la un event
+async function getUsersForEvent(eventId) {
+  try {
+    const event = await Event.findByPk(eventId, {
+      include: [
+        {
+          model: User,
+          as: "Users", // Asocierea definită în model
+        },
+      ],
+    });
 
-export { getAllUsers, getUserById, createUser, getUserByEmail };
+    const users = event.Users;
+
+    return { success: true, users: users };
+  } catch (error) {
+    console.error("Eroare ", error);
+    return {
+      success: false,
+    };
+  }
+}
+
+export {
+  getAllUsers,
+  getUserById,
+  createUser,
+  getUserByEmail,
+  getUsersForEvent,
+};

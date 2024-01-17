@@ -1,0 +1,60 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Kanit:ital,wght@1,600&display=swap');
+
+
+.logo{
+    padding-top: 10px;
+    width: 150px;
+    border-radius: 0px;
+    margin-left:35% ;
+    margin-right: 35%;
+}
+.title{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.username{
+    display: flex;
+    justify-content: center;
+    font-family: 'Kanit', sans-serif;
+    color: gray;
+}
+.btn-aboutus{
+    border-radius: 20px;
+	padding: 10px 20px;
+	border: 2px solid #000;
+	background-color: #fff; 
+	color: #000; 
+	font-size: 16px;
+	transition: background-color 0.3s, color 0.3s; 
+	cursor: pointer;
+	text-align: center;
+	text-decoration: none;
+	display: inline-block;
+	font-family: 'Poppins';
+}
+.btn-signout{
+    border-radius: 20px;
+	padding: 10px 20px;
+	border: 2px solid #000;
+	background-color: #fff; 
+	color: #000; 
+	font-size: 16px;
+	transition: background-color 0.3s, color 0.3s; 
+	cursor: pointer;
+	text-align: center;
+	text-decoration: none;
+	display: inline-block;
+	font-family: 'Poppins';
+}
+.btn-aboutus:hover{
+    background-color: #000; 
+	color: #fff; 
+	border: 2px solid white;
+}
+.btn-signout:hover{
+    background-color: #000; 
+	color: #fff; 
+	border: 2px solid white;
+}
