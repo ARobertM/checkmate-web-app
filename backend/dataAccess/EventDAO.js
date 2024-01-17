@@ -84,6 +84,8 @@ async function updateEventStatus(status, eventId) {
   }
 }
 
+//select pentru toate evenimentele la care participa un user
+
 export {
   getAllEvents,
   getEventById,

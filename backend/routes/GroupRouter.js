@@ -6,13 +6,13 @@ let groupRouter=express.Router();
 groupRouter.route('/group').post(async (req, res) => {
     return res.status(201).json(await createGroup(req.body));
 })
-groupRouter.route('/groups').get(async ( res) => {
+groupRouter.route('/groups').get(async ( req,res) => {
     return res.json(await getAllGroups());
 })
 groupRouter.route('/group/:id').get(async (req, res) => {
     return res.json(await getGroupById(req.params.id));
 })
-groupRouter.route('/group/user/:userId').get(async (req, res) => {
+groupRouter.route('/groups/user/:userId').get(async (req, res) => {
     return res.json(await getGroupsByUserId(req.params.userId));
 })
 

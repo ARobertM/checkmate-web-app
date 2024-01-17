@@ -10,7 +10,17 @@ async function createAttendace(attendace) {
       return {succes:false};
     }
   }
+  async function getAllAttendaces() {
+    try {
+      const attendaces = await AttendaceList.findAll();
+      return { success: true, attendaces: attendaces };
+    } catch (error) {
+      console.error("Eroare :", error);
+      return { success: false};
+    }
+  }
 
   export{
-    createAttendace
+    createAttendace,
+    getAllAttendaces
   }

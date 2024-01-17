@@ -31,8 +31,8 @@ function FK_Config(){
     Event.belongsTo(Group, { foreignKey: 'GroupId' });
 
     //1-n pentru a vedea ce user a creat un event
-    User.hasMany(Event,{as:'Evenimente',foreignKey:'UserId'});
-    Event.belongsTo(User, { foreignKey: 'UserId' });
+    //User.hasMany(Event,{as:'Evenimente',foreignKey:'UserId'});
+    //Event.belongsTo(User, { foreignKey: 'UserId' });
 
     //1-n pentru a vedea ce user a creat un grup
     User.hasMany(Group,{as:'Grupuri',foreignKey:'UserId'});

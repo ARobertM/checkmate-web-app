@@ -22,8 +22,8 @@ async function getGroupById(id) {
 
 async function createGroup(group) {
   try {
-    const group = await Group.create(group);
-    return { success: true, group: group };
+    const groupCreated= await Group.create(group);
+    return { success: true, group: groupCreated };
   } catch (error) {
     console.error("Eroare :", error);
     return { success: false };
