@@ -1,5 +1,5 @@
-// Home.js
 import React, { useState } from "react";
+import 'bootstrap/dist/css/bootstrap.min.css';
 import "./Home.css";
 import AddEvent from "../Events/AddEvent";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -8,6 +8,7 @@ import { faPlus } from '@fortawesome/free-solid-svg-icons';
 const Home = () => {
   const [showPopup, setShowPopup] = useState(false);
   const [eventData, setEventData] = useState([]); // State pentru stocarea datelor evenimentului
+  
 
   const handleSaveEvent = (data) => {
     setEventData(prevEvents => [...prevEvents, data]);
@@ -36,17 +37,46 @@ const Home = () => {
           </button>
         </div>
         {showPopup && <AddEvent onSave={handleSaveEvent} onClose={() => setShowPopup(false)} />}
+
         {/* Afișarea datelor evenimentului salvat */}
-        {eventData.map((event, index) => (
-          <div key={index} className="event-data">
-            <h2>Detalii eveniment:</h2>
-            <p>Nume eveniment: {event.eventName}</p>
-            <p>Data: {event.eventDateStart}</p>
-            <p>Ora de început: {event.startTime}</p>
-            <p>Ora de sfârșit: {event.endTime}</p>
-            <p>Descriere: {event.eventDescription}</p>
-          </div>
-        ))}
+        <div className="mt-3">
+          {eventData.map((event, index) => (
+            <div key={index} className="card mb-2 event-card">
+              <div className="card-body p-2">
+                <div className="row align-items-center">
+                  <div className="col-2 font-weight-bold">
+                    {event.eventName}
+                  </div>
+                  <div className="col-2 mb-2">
+                    {event.eventDateStart}
+                  </div>
+                  <div className="col-2 mb-2">
+                    {`${event.startTime} - ${event.endTime}`}
+                  </div>
+                  <div className="col-2 mb-2">
+                    {event.repeatOption === "Never" 
+                      ? "Va avea loc 1 zi" 
+                      : `Va avea loc zilnic ${event.repeatDays} zile`}
+                  </div>
+                  <div className="col-1 mb-2">
+                    {event.eventDescription}
+                  </div>
+                  <div className="col-1 mb-2">
+                    <span className={`status ${event.meetingOption === "Open" ? "text-success" : "text-danger"}`}>
+                      {event.meetingOption.toUpperCase()}
+                    </span>
+                  </div>
+                  <div className="col-1 mb-2">
+                    <button className="btn btn-sm btn-outline-secondary">Cod acces</button>
+                  </div>
+                  <div className="col-1 mb-2">
+                    <button className="btn btn-sm btn-outline-secondary">Șterge</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          ))}
+        </div>
       </div>
     </div>
   );

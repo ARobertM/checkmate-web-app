@@ -2,6 +2,7 @@ import React, { useState, forwardRef } from 'react';
 import DatePicker from 'react-datepicker';
 import "react-datepicker/dist/react-datepicker.css";
 import './AddEventStyle.css';
+import { reauthenticateWithCredential } from 'firebase/auth';
 
 
 
@@ -16,6 +17,8 @@ function AddEvent(props) {
     const [selectedOption, setSelectedOption] = useState("");
     const [repeatOption, setRepeatOption] = useState("Never");
     const [eventData, setEventData] = useState({ eventName: '', eventDate: '', startTime: '', endTime: '' });
+    const [accessCode, setAccessCode] = useState(""); // Starea pentru codul de acces
+
 
 
     const CustomInput = forwardRef(({ value, onClick }, ref) => (
@@ -66,7 +69,12 @@ function AddEvent(props) {
             eventName: eventName,
             eventDateStart: eventDateStart.toDateString(),
             eventDateEnd: eventDateEnd.toDateString(),
-            eventDescription: eventDescription
+            startTime: startTime, 
+            endTime: endTime,     
+            eventDescription: eventDescription,
+            meetingOption: selectedOption,
+            repeatOption: repeatOption,
+            repeatDays: repeatOption === "Daily" ? repeatDays : 1
         };
         props.onSave(eventData);
     };
@@ -145,7 +153,6 @@ function AddEvent(props) {
                 <div className="add-event-notice">
                     Întâlnirea ta va avea loc timp de {repeatOption === "Never" ? 1 : repeatDays} zile, de la ora: {startTime} la {endTime}.
                 </div>
-
                 <div className="add-event-attendees">
                     <input
                         type="text"
@@ -168,7 +175,7 @@ function AddEvent(props) {
                                     checked={selectedOption === "Open"}
                                     onChange={() => setSelectedOption("Open")}
                                 />
-                                Public
+                                Open
                             </label>
                             <label>
                                 <input
@@ -178,7 +185,7 @@ function AddEvent(props) {
                                     checked={selectedOption === "Closed"}
                                     onChange={() => setSelectedOption("Closed")}
                                 />
-                                Private
+                                Closed
                             </label>
                         </div>
                     )}

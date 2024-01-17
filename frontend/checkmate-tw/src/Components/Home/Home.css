@@ -305,3 +305,38 @@ body {
 	color: white;
   }
 
+
+
+  /* Ajustează dimensiunea generală a cardului și a elementelor din interior */
+.event-card {
+	margin-bottom: 0.5rem; /* Reducem spațiul dintre carduri */
+  }
+  
+  .event-card .card-body {
+	padding: 0.5rem; /* Reducem padding-ul din interiorul cardului */
+  }
+  
+  .event-card .row {
+	margin-right: -0.5rem;
+	margin-left: -0.5rem;
+  }
+  
+  .event-card .col-auto {
+	padding-right: 0.5rem;
+	padding-left: 0.5rem;
+	flex-grow: 0;
+	max-width: none;
+  }
+  
+  /* Specific pentru starea evenimentului */
+  .status {
+	font-weight: bold;
+  }
+  
+  /* Dacă vrei să reduci și mai mult spațiul dintre elemente */
+  .event-card .col-auto:not(:last-child) {
+	padding-right: 0.25rem;
+	padding-left: 0.25rem;
+  }
+  
+
