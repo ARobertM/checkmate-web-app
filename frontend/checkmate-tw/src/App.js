@@ -9,6 +9,7 @@ import AddEvent from "./Components/Events/AddEvent";
 import HomeUser from "./Components/HomeUser/HomeUser";
 
 
+
 function App() {
 
   return (
@@ -20,6 +21,7 @@ function App() {
         <Route path="/manager" element={<Home/>}/>
         <Route path="/addevent" element={<AddEvent/>}/>
         <Route path="/user" element={<HomeUser/>}/>
+        
       </Routes>
     </Router>
   );

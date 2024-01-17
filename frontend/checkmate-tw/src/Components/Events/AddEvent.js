@@ -150,8 +150,19 @@ function AddEvent(props) {
 
                 </div>
 
+
                 <div className="add-event-notice">
                     Întâlnirea ta va avea loc timp de {repeatOption === "Never" ? 1 : repeatDays} zile, de la ora: {startTime} la {endTime}.
+                </div>
+
+                <div className="add-event-cod-acces">
+                    <label>Cod acces:</label>
+                    <input
+                        type="text"
+                        placeholder="everything"
+                        value={accessCode}
+                        onChange={(e) => setAccessCode(e.target.value)}
+                    />
                 </div>
                 <div className="add-event-attendees">
                     <input

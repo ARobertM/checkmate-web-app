@@ -3,18 +3,32 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import { Link } from "react-router-dom";
 import "./Home.css";
 import AddEvent from "../Events/AddEvent";
+import QRCodeModal from "../QRCodeModal/QRCodeModal";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPlus } from '@fortawesome/free-solid-svg-icons';
 
 const Home = () => {
   const [showPopup, setShowPopup] = useState(false);
   const [eventData, setEventData] = useState([]); // State pentru stocarea datelor evenimentului
-  
+
+  const [showQRCodeModal, setShowQRCodeModal] = useState(false);
+  const [qrCodeText, setQrCodeText] = useState("");
+
 
   const handleSaveEvent = (data) => {
     setEventData(prevEvents => [...prevEvents, data]);
     setShowPopup(false); // Închide popup-ul după salvare
   };
+
+  const handleShowQRCodeModal = () => {
+    setShowQRCodeModal(true);
+    setQrCodeText("Textul pe care doriți să-l afișați în codul QR");
+  };
+
+  const handleCloseQRCodeModal = () => {
+    setShowQRCodeModal(false);
+  };
+  
 
   return (
     <div className="container">
@@ -55,8 +69,8 @@ const Home = () => {
                     {`${event.startTime} - ${event.endTime}`}
                   </div>
                   <div className="col-2 mb-2">
-                    {event.repeatOption === "Never" 
-                      ? "Va avea loc 1 zi" 
+                    {event.repeatOption === "Never"
+                      ? "Va avea loc 1 zi"
                       : `Va avea loc zilnic ${event.repeatDays} zile`}
                   </div>
                   <div className="col-1 mb-2">
@@ -68,7 +82,14 @@ const Home = () => {
                     </span>
                   </div>
                   <div className="col-1 mb-2">
-                    <button className="btn btn-sm btn-outline-secondary">Cod acces</button>
+                    <button className="btn btn-sm btn-outline-secondary" onClick={() => {
+                      setShowPopup(true);
+                      setQrCodeText("Textul pe care doriți să-l afișați în codul QR");
+                    }}>
+                      Cod acces
+                    </button>
+                    <QRCodeModal show={showQRCodeModal} handleClose={handleCloseQRCodeModal} qrCodeText={qrCodeText} />
+
                   </div>
                   <div className="col-1 mb-2">
                     <button className="btn btn-sm btn-outline-secondary">Șterge</button>
