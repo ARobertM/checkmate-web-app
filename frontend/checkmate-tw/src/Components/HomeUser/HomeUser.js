@@ -3,6 +3,7 @@ import "./HomeUser.css";
 import axios from "axios";
 import { onAuthStateChanged } from "firebase/auth";
 import { auth } from "../../Firebase";
+import { Button } from "bootstrap";
 
 const HomeUser = () => {
   const [date, setDate] = useState([]);
@@ -33,9 +34,9 @@ const HomeUser = () => {
   return (
     <div className="container">
       <div className="principal-container">
-        <button className="btn-aboutus">About Us</button>
+        <button className="btn-aboutus-1">About Us</button>
         <img className="logo" src="/logo_checkmate.png" alt="Checkmate Logo" />
-        <button className="btn-signout">Sign out</button>
+        <button className="btn-signout-1">Sign out</button>
         <span className="title">
           <div className="title-description">
             <span className="title-text"> Welcome to, </span>
@@ -45,6 +46,9 @@ const HomeUser = () => {
         <div className="username">
           User: {UserFirstName} {UserLastName}{" "}
         </div>
+      </div>
+      <div className="container-evenimente">
+        <button className="green-button-1">Add Event</button>
       </div>
     </div>
   );

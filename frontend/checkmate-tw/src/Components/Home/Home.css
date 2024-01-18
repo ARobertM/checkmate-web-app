@@ -1,342 +1,253 @@
-@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Kanit:ital,wght@1,600&display=swap');
-
-body {
-	background: linear-gradient(-45deg, #f7f5f5, #a1a1a1, #252525,
-    #030303,#000000);
-	background-size: 400% 400%;
-	animation: gradient 15s ease infinite;
-	height: 100vh;
-}
-
-.pricipal-container{
-	display: flex;
-	justify-content: start;
-	flex-direction: column;
-	align-items: flex-start;
-}
-.add-event-container {
-	position: absolute; /* Faceți ca pop-up-ul să fie poziționat absolut pentru a se așeza în partea de jos și în stânga */
-	bottom: 20px; /* Distanța de jos */
-	left: 20px; /* Distanța de stânga */
-	z-index: 999; /* Afișați pop-up-ul peste restul conținutului */
-  }
-
-@keyframes gradient {
-	0% {
-		background-position: 0% 50%;
-	}
-	50% {
-		background-position: 100% 50%;
-	}
-	100% {
-		background-position: 0% 50%;
-	}
-}
-.logo{
-	padding-top: 10px;
-    width: 200px;
-    border-radius: 30px;
-}
-.title-text{
-	color: white;
-	font-family: 'Poppins';
-	font-size: 40px;
-}
-.title-checkmate{
-	font-family: 'Kanit';
-	font-size: 60px;
-	color: white;
-}
-.title-description{
-	display: flex;
-	justify-content: center;
-}
-
-.btn-sign-in {
-	margin-top: -160px;
-	margin-bottom: 190px;
-	margin-left: 100px;
-	border-radius: 20px;
-	padding: 10px 20px;
-	border: 2px solid #000;
-	background-color: #fff; 
-	color: #000; 
-	font-size: 16px;
-	transition: background-color 0.3s, color 0.3s; 
-	cursor: pointer;
-	text-align: center;
-	text-decoration: none;
-	display: inline-block;
-	font-family: 'Poppins';
-  }
-  
-  
-.btn-about-us {
-	margin-top: -160px;
-	margin-bottom: 190px;
-	margin-left: 30px;
-	border-radius: 20px;
-	padding: 10px 20px;
-	border: 2px solid #000;
-	background-color: #fff; 
-	color: #000; 
-	font-size: 16px;
-	transition: background-color 0.3s, color 0.3s; 
-	cursor: pointer;
-	text-align: center;
-	text-decoration: none;
-	display: inline-block;
-	font-family: 'Poppins';
- }
- .btn-about-us:hover {
-	background-color: #000; 
-	color: #fff; 
-	border: 2px solid white;
-  }
-
-  
-  .btn-sign-in:hover {
-	background-color: #000; 
-	color: #fff; 
-	border: 2px solid white;
-  }
-
-  .linie{
-	color: white;
-	border: 2px solid white;
-	margin-right: 400px;
-  }
-  .loggin-as{
-	font-family: 'Poppins';
-	margin-top: -150px;
-	font-size: 16px;
-	color: white;
-	margin-left: 250px;
-  }
-  .container-evenimente{
-	display: flex;
-	justify-content: center;
-	margin-top: 170px;
-	margin-top: 170px;
-  }
-
-
   @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap');
   @import url('https://fonts.googleapis.com/css2?family=Kanit:ital,wght@1,600&display=swap');
-  
+
   body {
-	  background: linear-gradient(-45deg, #f7f5f5, #a1a1a1, #252525,
-	  #030303,#000000);
-	  background-size: 400% 400%;
-	  animation: gradient 15s ease infinite;
-	  height: 100vh;
+  	background: linear-gradient(-45deg, #f7f5f5, #a1a1a1, #252525,
+  			#030303, #000000);
+  	background-size: 400% 400%;
+  	animation: gradient 15s ease infinite;
+  	height: 100vh;
   }
-  
-  .pricipal-container{
-	  display: flex;
-	  justify-content: start;
-	  flex-direction: column;
-	  align-items: flex-start;
+
+  .pricipal-container {
+  	display: flex;
+  	justify-content: space-between;
+  	flex-direction: row;
+  	align-items: baseline;
   }
+
   .add-event-container {
-	  position: absolute; /* Faceți ca pop-up-ul să fie poziționat absolut pentru a se așeza în partea de jos și în stânga */
-	  bottom: 20px; /* Distanța de jos */
-	  left: 20px; /* Distanța de stânga */
-	  z-index: 999; /* Afișați pop-up-ul peste restul conținutului */
-	}
-  
+  	position: absolute;
+  	/* Faceți ca pop-up-ul să fie poziționat absolut pentru a se așeza în partea de jos și în stânga */
+  	bottom: 20px;
+  	/* Distanța de jos */
+  	left: 20px;
+  	/* Distanța de stânga */
+  	z-index: 999;
+  	/* Afișați pop-up-ul peste restul conținutului */
+  }
+
   @keyframes gradient {
-	  0% {
-		  background-position: 0% 50%;
-	  }
-	  50% {
-		  background-position: 100% 50%;
-	  }
-	  100% {
-		  background-position: 0% 50%;
-	  }
-  }
-  .logo{
-	  padding-top: 10px;
-	  width: 200px;
-	  border-radius: 30px;
-  }
-  .title-text{
-	  color: white;
-	  font-family: 'Poppins';
-	  font-size: 40px;
-  }
-  .title-checkmate{
-	  font-family: 'Kanit';
-	  font-size: 60px;
-	  color: white;
-  }
-  .title-description{
-	  display: flex;
-	  justify-content: center;
-  }
-  
-  .btn-sign-in {
-	  margin-top: -160px;
-	  margin-bottom: 190px;
-	  margin-left: 100px;
-	  border-radius: 20px;
-	  padding: 10px 20px;
-	  border: 2px solid #000;
-	  background-color: #fff; 
-	  color: #000; 
-	  font-size: 16px;
-	  transition: background-color 0.3s, color 0.3s; 
-	  cursor: pointer;
-	  text-align: center;
-	  text-decoration: none;
-	  display: inline-block;
-	  font-family: 'Poppins';
-	}
-	
-	
-  .btn-about-us {
-	  margin-top: -160px;
-	  margin-bottom: 190px;
-	  margin-left: 30px;
-	  border-radius: 20px;
-	  padding: 10px 20px;
-	  border: 2px solid #000;
-	  background-color: #fff; 
-	  color: #000; 
-	  font-size: 16px;
-	  transition: background-color 0.3s, color 0.3s; 
-	  cursor: pointer;
-	  text-align: center;
-	  text-decoration: none;
-	  display: inline-block;
-	  font-family: 'Poppins';
-   }
-   .btn-about-us:hover {
-	  background-color: #000; 
-	  color: #fff; 
-	  border: 2px solid white;
-	}
-  
-	
-	.btn-sign-in:hover {
-	  background-color: #000; 
-	  color: #fff; 
-	  border: 2px solid white;
-	}
-  
-	.linie{
-	  color: white;
-	  border: 2px solid white;
-	  margin-right: 400px;
-	}
-	.loggin-as{
-	  font-family: 'Poppins';
-	  margin-top: -150px;
-	  font-size: 16px;
-	  color: white;
-	  margin-left: 250px;
-	}
-	.container-evenimente{
-	  display: flex;
-	  justify-content: center;
-	  margin-top: 170px;
-	  margin-top: 170px;
-	}
-  
-  
-	.green-button {
-	  background-color: #c0f8c0;
-	  color: rgb(94, 240, 80);
-	  border: none;
-	  cursor: pointer;
-	  font-size: 50px;
-	  padding: 15px 30px;
-	  border-radius: 100px;
-	  transition: background-color 0.3s;
-	  outline: none;
-	  position: relative;
-	  overflow: hidden;
-  }
-  
+  	0% {
+  		background-position: 0% 50%;
+  	}
 
-	.green-button:hover {
-	  background-color: #00cc00;
-	  color: white;
+  	50% {
+  		background-position: 100% 50%;
+  	}
+
+  	100% {
+  		background-position: 0% 50%;
+  	}
   }
-	
-	.green-button:hover::before {
-	  filter: blur(10px); /* Efect de blur la hover */
-	}
-	
-	.plus-icon {
-	  color: white; /* Culoarea textului pentru iconul "+" */
-	  font-size: 24px;
-	}
-  
-  
-	.popup {
-		display: none; /* Inițial, pop-up-ul este ascuns */
-		position: absolute; /* Poziția fixă față de viewport */
-		left: 50%; /*Centrat orizontal */
-		top: 50%; /* Centrat vertical */
-		transform: translate(-50%, -50%); /*Ajustează poziția pentru centrare exactă */
-		width: 100%; 
-		max-width: 500px; 
-		padding: 20px; 
-		background: #fff; /* Fundal alb */
-		box-shadow: 0 5px 15px rgba(0,0,0,0.3); /* Umbra pentru aspectul ridicat */
-		z-index: 1000; /* Asigură-te că se află deasupra altor elemente */
-	   
-		border-radius: 30px; /* Rotunjirea colțurilor pentru estetică */
-	}
-  
-  
+
+  .title-checkmate {
+  	font-family: 'Kanit';
+  	font-size: 80px;
+  	padding-top: 10px;
+  	color: #25252500;
+  	-webkit-text-stroke-width: 3px;
+  	-webkit-text-stroke-color: rgb(255, 255, 255);
+  }
+
+  .logo {
+  	padding-top: 10px;
+  	width: 150px;
+  	border-radius: 0px;
+  	margin-left: 35%;
+  	margin-right: 35%;
+  	margin-top: 10px;
+  }
+
+  .title {
+  	font-family: 'Kanit';
+  	display: flex;
+  	align-items: center;
+  	justify-content: center;
+  }
+
+  .username {
+  	display: flex;
+  	justify-content: center;
+  	font-family: 'Kanit', sans-serif;
+  	color: gray;
+  }
+
+  .btn-aboutus {
+  	border-radius: 20px;
+  	padding: 10px 20px;
+  	border: 2px solid #000;
+  	background-color: #fff;
+  	color: #000;
+  	font-size: 16px;
+  	transition: background-color 0.3s, color 0.3s;
+  	cursor: pointer;
+  	text-align: center;
+  	text-decoration: none;
+  	display: inline-block;
+  	font-family: 'Poppins';
+  	-webkit-box-shadow: 0px 0px 274px 73px rgba(166, 255, 0, 1);
+  	-moz-box-shadow: 0px 0px 274px 73px rgba(166, 255, 0, 1);
+  	box-shadow: 0px 0px 274px 73px rgba(166, 255, 0, 1);
+  }
+
+  .btn-signout {
+  	border-radius: 20px;
+  	padding: 10px 20px;
+  	border: 2px solid #000;
+  	background-color: #fff;
+  	color: #000;
+  	font-size: 16px;
+  	transition: background-color 0.3s, color 0.3s;
+  	cursor: pointer;
+  	text-align: center;
+  	text-decoration: none;
+  	display: inline-block;
+  	font-family: 'Poppins';
+  	-webkit-box-shadow: 0px 0px 274px 73px rgba(166, 255, 0, 1);
+  	-moz-box-shadow: 0px 0px 274px 73px rgba(166, 255, 0, 1);
+  	box-shadow: 0px 0px 274px 73px rgba(166, 255, 0, 1);
+  }
+
+  .btn-aboutus:hover {
+  	background-color: #000;
+  	color: #fff;
+  	border: 2px solid white;
+  }
+
+  .btn-signout:hover {
+  	background-color: #000;
+  	color: #fff;
+  	border: 2px solid white;
+  }
+
+  .linie {
+  	color: white;
+  	border: 2px solid white;
+  	margin-right: 400px;
+  }
+
+  .loggin-as {
+  	font-family: 'Poppins';
+  	margin-top: -150px;
+  	font-size: 16px;
+  	color: white;
+  	margin-left: 250px;
+  }
+
+  .container-evenimente {
+  	display: flex;
+  	justify-content: center;
+  	margin-top: 170px;
+  	margin-top: 170px;
+  }
+
+
+  .green-button {
+  	background-color: #c0f8c0;
+  	color: rgb(94, 240, 80);
+  	border: none;
+  	cursor: pointer;
+  	font-size: 50px;
+  	padding: 15px 30px;
+  	border-radius: 100px;
+  	transition: background-color 0.3s;
+  	outline: none;
+  	position: relative;
+  	overflow: hidden;
+  }
+
+
+  .green-button:hover {
+  	background-color: #00cc00;
+  	color: white;
+	  -webkit-box-shadow: 0px 0px 274px 73px rgba(166,255,0,1);
+	  -moz-box-shadow: 0px 0px 274px 73px rgba(166,255,0,1);
+	  box-shadow: 0px 0px 274px 73px rgba(166,255,0,1);
+  }
+
+  .green-button:hover::before {
+  	filter: blur(10px);
+  	/* Efect de blur la hover */
+  }
+
+  .plus-icon {
+  	color: white;
+  	/* Culoarea textului pentru iconul "+" */
+  	font-size: 24px;
+  }
+
+
+  .popup {
+  	display: none;
+  	/* Inițial, pop-up-ul este ascuns */
+  	position: absolute;
+  	/* Poziția fixă față de viewport */
+  	left: 50%;
+  	/*Centrat orizontal */
+  	top: 50%;
+  	/* Centrat vertical */
+  	transform: translate(-50%, -50%);
+  	/*Ajustează poziția pentru centrare exactă */
+  	width: 100%;
+  	max-width: 500px;
+  	padding: 20px;
+  	background: #fff;
+  	/* Fundal alb */
+  	box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+  	/* Umbra pentru aspectul ridicat */
+  	z-index: 1000;
+  	/* Asigură-te că se află deasupra altor elemente */
+
+  	border-radius: 30px;
+  	/* Rotunjirea colțurilor pentru estetică */
+  }
+
+
   .popup-visible {
-	  display: flex;
-	  justify-content: center;
-	  align-items: center;
-	  top: 50%;
-	  left: 50%;
+  	display: flex;
+  	justify-content: center;
+  	align-items: center;
+  	top: 50%;
+  	left: 50%;
   }
 
-  .event-data{
-	color: white;
+  .event-data {
+  	color: white;
   }
 
 
 
   /* Ajustează dimensiunea generală a cardului și a elementelor din interior */
-.event-card {
-	margin-bottom: 0.5rem; /* Reducem spațiul dintre carduri */
+  .event-card {
+  	margin-bottom: 0.5rem;
+  	/* Reducem spațiul dintre carduri */
   }
-  
+
   .event-card .card-body {
-	padding: 0.5rem; /* Reducem padding-ul din interiorul cardului */
+  	padding: 0.5rem;
+  	/* Reducem padding-ul din interiorul cardului */
   }
-  
+
   .event-card .row {
-	margin-right: -0.5rem;
-	margin-left: -0.5rem;
+  	margin-right: -0.5rem;
+  	margin-left: -0.5rem;
   }
-  
+
   .event-card .col-auto {
-	padding-right: 0.5rem;
-	padding-left: 0.5rem;
-	flex-grow: 0;
-	max-width: none;
+  	padding-right: 0.5rem;
+  	padding-left: 0.5rem;
+  	flex-grow: 0;
+  	max-width: none;
   }
-  
+
   /* Specific pentru starea evenimentului */
   .status {
-	font-weight: bold;
+  	font-weight: bold;
   }
-  
+
   /* Dacă vrei să reduci și mai mult spațiul dintre elemente */
   .event-card .col-auto:not(:last-child) {
-	padding-right: 0.25rem;
-	padding-left: 0.25rem;
+  	padding-right: 0.25rem;
+  	padding-left: 0.25rem;
   }
-  
-

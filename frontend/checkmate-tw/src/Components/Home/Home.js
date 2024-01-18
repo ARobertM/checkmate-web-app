@@ -7,53 +7,57 @@ import QRCodeModal from "../QRCodeModal/QRCodeModal";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPlus } from '@fortawesome/free-solid-svg-icons';
 
-const Home = () => {
+const Home = ({ UserFirstName, UserLastName }) => {
   const [showPopup, setShowPopup] = useState(false);
-  const [eventData, setEventData] = useState([]); // State pentru stocarea datelor evenimentului
-
-  const [showQRCodeModal, setShowQRCodeModal] = useState(false);
-  const [qrCodeText, setQrCodeText] = useState("");
-
+  const [eventData, setEventData] = useState([]);
+  const [showQRCodePopup, setShowQRCodePopup] = useState(false); // Aici am modificat numele stării
+  const [qrCodeText, setQrCodeText] = useState(""); // Aici am modificat numele stării
 
   const handleSaveEvent = (data) => {
     setEventData(prevEvents => [...prevEvents, data]);
-    setShowPopup(false); // Închide popup-ul după salvare
+    setShowPopup(false);
   };
 
-  const handleShowQRCodeModal = () => {
-    setShowQRCodeModal(true);
-    setQrCodeText("Textul pe care doriți să-l afișați în codul QR");
+  const handleShowQRCodeModal = (qrCodeText) => { // Am modificat funcția
+    setQrCodeText(qrCodeText); // Setăm textul QR Code
+    setShowQRCodePopup(true); // Deschidem pop-up-ul
   };
 
-  const handleCloseQRCodeModal = () => {
-    setShowQRCodeModal(false);
+  const handleCloseQRCodePopup = () => {
+    setShowQRCodePopup(false); // Închidem pop-up-ul
   };
-  
 
   return (
     <div className="container">
       <div className="principal-container">
+        <button className="btn-aboutus">About Us</button>
+        <img className="logo" src="/logo_checkmate.png" alt="Checkmate Logo" />
+        <button className="btn-signout">Sign out</button>
         <span className="title">
-          <img className="logo" src='/logo_checkmate.png' alt="Checkmate Logo" />
           <div className="title-description">
             <span className="title-text"> Welcome to, </span>
             <span className="title-checkmate">Checkmate</span>
-            <span className="loggin-as">User: </span>
-            {/* de adaugat state cu user-ul sa-i apara numele */}
-            <Link to="/signin" className="btn-sign-in">Sign In</Link>
-            <button className="btn-about-us">About Us</button>
           </div>
-          <hr className="linie" />
         </span>
+        <div className="username">
+          Organizer: {UserFirstName} {UserLastName}{" "}
+        </div>
 
         <div className="container-evenimente">
           <button className="green-button" onClick={() => setShowPopup(true)}>
             <FontAwesomeIcon icon={faPlus} />
           </button>
         </div>
-        {showPopup && <AddEvent onSave={handleSaveEvent} onClose={() => setShowPopup(false)} />}
+        {showPopup && (
+          <AddEvent
+            onSave={(data) => {
+              handleSaveEvent(data);
+              handleShowQRCodeModal(data.accesCode); 
+            }}
+            onClose={() => setShowPopup(false)}
+          />
+        )}
 
-        {/* Afișarea datelor evenimentului salvat */}
         <div className="mt-3">
           {eventData.map((event, index) => (
             <div key={index} className="card mb-2 event-card">
@@ -82,14 +86,16 @@ const Home = () => {
                     </span>
                   </div>
                   <div className="col-1 mb-2">
-                    <button className="btn btn-sm btn-outline-secondary" onClick={() => {
-                      setShowPopup(true);
-                      setQrCodeText("Textul pe care doriți să-l afișați în codul QR");
-                    }}>
+                    <button className="btn btn-sm btn-outline-secondary" onClick={() => handleShowQRCodeModal(event.accesCode)}>
                       Cod acces
                     </button>
-                    <QRCodeModal show={showQRCodeModal} handleClose={handleCloseQRCodeModal} qrCodeText={qrCodeText} />
-
+                    {showQRCodePopup && (
+                      <QRCodeModal
+                        show={showQRCodePopup}
+                        handleClose={handleCloseQRCodePopup}
+                        qrCodeText={qrCodeText}
+                      />
+                    )}
                   </div>
                   <div className="col-1 mb-2">
                     <button className="btn btn-sm btn-outline-secondary">Șterge</button>
