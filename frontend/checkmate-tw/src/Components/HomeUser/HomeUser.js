@@ -3,16 +3,16 @@ import "./HomeUser.css";
 import axios from "axios";
 import { onAuthStateChanged } from "firebase/auth";
 import { auth } from "../../Firebase";
-import { Button } from "bootstrap";
+import UserEventChoose from "../UserEventChoose/UserEventChoose"; // Importă UserEventChoose
 
 const HomeUser = () => {
   const [date, setDate] = useState([]);
-  //const [email, setEmail] = useState("");
+  const [isUserEventChooseOpen, setIsUserEventChooseOpen] = useState(false); // Stadiu pentru controlul pop-up-ului
+
   useEffect(() => {
     let email;
     onAuthStateChanged(auth, (user) => {
       if (user) {
-        //setEmail(user.email)
         email = user.email;
       }
 
@@ -31,6 +31,11 @@ const HomeUser = () => {
   }, []);
 
   const { UserFirstName, UserLastName, UserRole } = date;
+
+  const openUserEventChooseModal = () => {
+    setIsUserEventChooseOpen(true);
+  };
+
   return (
     <div className="container">
       <div className="principal-container">
@@ -44,11 +49,17 @@ const HomeUser = () => {
           </div>
         </span>
         <div className="username">
-          User: {UserFirstName} {UserLastName}{" "}
+          User: {UserFirstName} {UserLastName}
         </div>
       </div>
       <div className="container-evenimente">
-        <button className="green-button-1">Add Event</button>
+        <button className="green-button-1" onClick={openUserEventChooseModal}>
+          Add Event
+        </button>
+        <UserEventChoose
+          isOpen={isUserEventChooseOpen}
+          onClose={() => setIsUserEventChooseOpen(false)}
+        />
       </div>
     </div>
   );

@@ -18,13 +18,9 @@
 
   .add-event-container {
   	position: absolute;
-  	/* Faceți ca pop-up-ul să fie poziționat absolut pentru a se așeza în partea de jos și în stânga */
   	bottom: 20px;
-  	/* Distanța de jos */
   	left: 20px;
-  	/* Distanța de stânga */
   	z-index: 999;
-  	/* Afișați pop-up-ul peste restul conținutului */
   }
 
   @keyframes gradient {
@@ -168,39 +164,27 @@
 
   .green-button:hover::before {
   	filter: blur(10px);
-  	/* Efect de blur la hover */
   }
 
   .plus-icon {
   	color: white;
-  	/* Culoarea textului pentru iconul "+" */
   	font-size: 24px;
   }
 
 
   .popup {
   	display: none;
-  	/* Inițial, pop-up-ul este ascuns */
   	position: absolute;
-  	/* Poziția fixă față de viewport */
   	left: 50%;
-  	/*Centrat orizontal */
   	top: 50%;
-  	/* Centrat vertical */
   	transform: translate(-50%, -50%);
-  	/*Ajustează poziția pentru centrare exactă */
   	width: 100%;
   	max-width: 500px;
   	padding: 20px;
   	background: #fff;
-  	/* Fundal alb */
   	box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
-  	/* Umbra pentru aspectul ridicat */
   	z-index: 1000;
-  	/* Asigură-te că se află deasupra altor elemente */
-
   	border-radius: 30px;
-  	/* Rotunjirea colțurilor pentru estetică */
   }
 
 

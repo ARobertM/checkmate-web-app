@@ -15,6 +15,7 @@ function create_db(){
     mysql.createConnection({
         user:process.env.DB_USERNAME,
         password : process.env.DB_PASSWORD,
+        // socketPath : process.env.DB_SOCKET_PATH
     }).then((connection) => {
         conn = connection;
         return conn.query("CREATE DATABASE IF NOT EXISTS CheckmateDB");
