@@ -9,7 +9,7 @@ const SignUp = () => {
   const [lastName, setLastName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [role,setRole]=useState("");
+  const [role,setRole]=useState("PARTICIPANT");
   const navigate = useNavigate();
 
   // Funcția pentru gestionarea evenimentului de trimitere a formularului
