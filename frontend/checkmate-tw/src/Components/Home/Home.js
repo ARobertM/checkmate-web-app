@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
-import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import "./Home.css";
 import AddEvent from "../Events/AddEvent";
 import QRCodeModal from "../QRCodeModal/QRCodeModal";
@@ -16,6 +16,7 @@ const Home = () => {
   const [showQRCodePopup, setShowQRCodePopup] = useState(false); // Aici am modificat numele stării
   const [qrCodeText, setQrCodeText] = useState(""); // Aici am modificat numele stării
   const [user, setUser] = useState({}); //variabila pentru stocarea deatelor despre user
+  const navigate = useNavigate();
 
   useEffect(() => {
     let email;
@@ -93,7 +94,7 @@ const Home = () => {
   return (
     <div className="container">
       <div className="principal-container">
-        <button className="btn-aboutus">About Us</button>
+        <button className="btn-aboutus" onClick={()=>{navigate("/aboutus")}}>About Us</button>
         <img className="logo" src="/logo_checkmate.png" alt="Checkmate Logo" />
         <button className="btn-signout">Sign out</button>
         <span className="title">

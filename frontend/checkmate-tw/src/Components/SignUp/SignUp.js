@@ -24,7 +24,7 @@ const SignUp = () => {
         UserRole: role,
       });
 
-      console.log(response.data);
+      //console.log(response.data);
       navigate("/login");
     } catch (error) {
       const errorCode = error.code;
