@@ -42,6 +42,7 @@ const Home = () => {
             let endHours = new Date(event.EventEndDate).getHours();
             let endMinutes = new Date(event.EventEndDate).getMinutes();
             return {
+              eventId:event.EventId,
               eventName: event.EventName,
               eventDescription: event.EventDescription,
               eventDateStart: new Date(event.EventStartDate),
@@ -73,6 +74,11 @@ const Home = () => {
     setEventData((prevEvents) => [...prevEvents, data]);
     setShowPopup(false);
   };
+
+  const handleDeleteEvent = async(id)=>{
+    await axios.delete('http://localhost:9000/api/event/'+id)
+    setEventData(prevData => prevData.filter(event => event.eventId !== id));
+  }
 
   const handleShowQRCodeModal = (qrCodeText) => {
     // Am modificat funcția
@@ -111,7 +117,7 @@ const Home = () => {
               console.log(data.eventDateStart);
               console.log(data.eventDateEnd);
 
-              await axios.post("http://localhost:9000/api/event", {
+             const response=await axios.post("http://localhost:9000/api/event", {
                 EventName: data.eventName,
                 EventDescription: data.eventDescription,
                 EventStartDate: data.eventDateStart,
@@ -121,7 +127,8 @@ const Home = () => {
                 GroupId: 1,
                 UserId: user.UserId,
               });
-
+              data.eventId=response.data.event.EventId
+             
               handleSaveEvent(data);
               handleShowQRCodeModal(data.accesCode);
             }}
@@ -176,7 +183,8 @@ const Home = () => {
                     )}
                   </div>
                   <div className="col-1 mb-2">
-                    <button className="btn btn-sm btn-outline-secondary">
+                    <button className="btn btn-sm btn-outline-secondary" onClick={()=>handleDeleteEvent(event.eventId) } 
+                    >
                       Șterge
                     </button>
                   </div>

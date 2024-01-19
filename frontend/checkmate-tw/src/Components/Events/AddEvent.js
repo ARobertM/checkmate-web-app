@@ -70,6 +70,7 @@ function AddEvent(props) {
     }
 
     const eventData = {
+        eventId:0,
       eventName: eventName,
       eventDateStart: eventDateStart,
       eventDateEnd: eventDateEnd,

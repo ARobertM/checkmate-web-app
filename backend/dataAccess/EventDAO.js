@@ -84,6 +84,23 @@ async function updateEventStatus(status, eventId) {
   }
 }
 
+async function deleteEventById(eventId) {
+  try {
+    const event = await Event.destroy({
+      where: {
+        EventId: eventId,
+      },
+    });
+    if(event>0)
+    return { success: true};
+  else return {success:false}
+  } catch (error) {
+    console.error("Eroare :", error);
+    return { success: false};
+  }
+}
+
+
 //select pentru toate evenimentele la care participa un user
 
 export {
@@ -93,4 +110,5 @@ export {
   getEventsByUserId,
   getEventsByGroup,
   updateEventStatus,
+  deleteEventById
 };
