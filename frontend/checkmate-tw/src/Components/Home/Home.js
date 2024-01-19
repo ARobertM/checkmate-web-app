@@ -1,24 +1,81 @@
-import React, { useState } from "react";
-import 'bootstrap/dist/css/bootstrap.min.css';
+import React, { useState, useEffect } from "react";
+import "bootstrap/dist/css/bootstrap.min.css";
 import { Link } from "react-router-dom";
 import "./Home.css";
 import AddEvent from "../Events/AddEvent";
 import QRCodeModal from "../QRCodeModal/QRCodeModal";
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faPlus } from '@fortawesome/free-solid-svg-icons';
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faPlus } from "@fortawesome/free-solid-svg-icons";
+import axios from "axios";
+import { onAuthStateChanged } from "firebase/auth";
+import { auth } from "../../Firebase";
 
-const Home = ({ UserFirstName, UserLastName }) => {
+const Home = () => {
   const [showPopup, setShowPopup] = useState(false);
   const [eventData, setEventData] = useState([]);
   const [showQRCodePopup, setShowQRCodePopup] = useState(false); // Aici am modificat numele stării
   const [qrCodeText, setQrCodeText] = useState(""); // Aici am modificat numele stării
+  const [user, setUser] = useState({}); //variabila pentru stocarea deatelor despre user
+
+  useEffect(() => {
+    let email;
+    onAuthStateChanged(auth, (userAuth) => {
+      if (userAuth) {
+        email = userAuth.email;
+      }
+
+      const fetchData = async () => {
+        try {
+          const response = await axios.get(
+            "http://localhost:9000/api/user/email/" + email
+          );
+          setUser(response.data.users[0]);
+         
+          const eventResponse = await axios.get(
+            "http://localhost:9000/api/events/user/" +
+              response.data.users[0].UserId
+          );
+          
+          const events = eventResponse.data.events.map((event) => {
+            let startHours = new Date(event.EventStartDate).getHours();
+            let startMinutes = new Date(event.EventStartDate).getMinutes();
+            let endHours = new Date(event.EventEndDate).getHours();
+            let endMinutes = new Date(event.EventEndDate).getMinutes();
+            return {
+              eventName: event.EventName,
+              eventDescription: event.EventDescription,
+              eventDateStart: new Date(event.EventStartDate),
+              eventDateEnd: new Date(event.EventEndDate),
+              meetingOption: event.EventStatus,
+              repeatOption: "Never",
+              repeatDays: 1,
+              accessCode: event.EventCodAccess,
+              startTime:
+                startHours +
+                ":" +
+                (startMinutes < 10 ? "0" + startMinutes : startMinutes),
+              endTime:
+                endHours +
+                ":" +
+                (endMinutes < 10 ? "0" + endMinutes : endMinutes),
+            };
+          });
+          setEventData(events);
+        } catch (error) {
+          console.error("Eroare la preluarea datelor:", error);
+        }
+      };
+      fetchData();
+    });
+  }, [setUser]);
 
   const handleSaveEvent = (data) => {
-    setEventData(prevEvents => [...prevEvents, data]);
+    setEventData((prevEvents) => [...prevEvents, data]);
     setShowPopup(false);
   };
 
-  const handleShowQRCodeModal = (qrCodeText) => { // Am modificat funcția
+  const handleShowQRCodeModal = (qrCodeText) => {
+    // Am modificat funcția
     setQrCodeText(qrCodeText); // Setăm textul QR Code
     setShowQRCodePopup(true); // Deschidem pop-up-ul
   };
@@ -40,7 +97,7 @@ const Home = ({ UserFirstName, UserLastName }) => {
           </div>
         </span>
         <div className="username">
-          Organizer: {UserFirstName} {UserLastName}{" "}
+          Organizer:{user.UserLastName + " " + user.UserFirstName}
         </div>
 
         <div className="container-evenimente">
@@ -50,9 +107,23 @@ const Home = ({ UserFirstName, UserLastName }) => {
         </div>
         {showPopup && (
           <AddEvent
-            onSave={(data) => {
+            onSave={async (data) => {
+              console.log(data.eventDateStart);
+              console.log(data.eventDateEnd);
+
+              await axios.post("http://localhost:9000/api/event", {
+                EventName: data.eventName,
+                EventDescription: data.eventDescription,
+                EventStartDate: data.eventDateStart,
+                EventEndDate: data.eventDateEnd,
+                EventStatus: data.meetingOption,
+                EventCodAccess: data.accessCode,
+                GroupId: 1,
+                UserId: user.UserId,
+              });
+
               handleSaveEvent(data);
-              handleShowQRCodeModal(data.accesCode); 
+              handleShowQRCodeModal(data.accesCode);
             }}
             onClose={() => setShowPopup(false)}
           />
@@ -67,26 +138,33 @@ const Home = ({ UserFirstName, UserLastName }) => {
                     {event.eventName}
                   </div>
                   <div className="col-2 mb-2">
-                    {event.eventDateStart}
+                    {event.eventDateStart.toDateString()}
                   </div>
                   <div className="col-2 mb-2">
                     {`${event.startTime} - ${event.endTime}`}
                   </div>
                   <div className="col-2 mb-2">
                     {event.repeatOption === "Never"
-                      ? "Va avea loc 1 zi"
+                      ? "Va avea loc o singura data"
                       : `Va avea loc zilnic ${event.repeatDays} zile`}
                   </div>
+                  <div className="col-1 mb-2">{event.eventDescription}</div>
                   <div className="col-1 mb-2">
-                    {event.eventDescription}
-                  </div>
-                  <div className="col-1 mb-2">
-                    <span className={`status ${event.meetingOption === "Open" ? "text-success" : "text-danger"}`}>
+                    <span
+                      className={`status ${
+                        event.meetingOption === "OPEN"
+                          ? "text-success"
+                          : "text-danger"
+                      }`}
+                    >
                       {event.meetingOption.toUpperCase()}
                     </span>
                   </div>
                   <div className="col-1 mb-2">
-                    <button className="btn btn-sm btn-outline-secondary" onClick={() => handleShowQRCodeModal(event.accesCode)}>
+                    <button
+                      className="btn btn-sm btn-outline-secondary"
+                      onClick={() => handleShowQRCodeModal(event.accesCode)}
+                    >
                       Cod acces
                     </button>
                     {showQRCodePopup && (
@@ -98,7 +176,9 @@ const Home = ({ UserFirstName, UserLastName }) => {
                     )}
                   </div>
                   <div className="col-1 mb-2">
-                    <button className="btn btn-sm btn-outline-secondary">Șterge</button>
+                    <button className="btn btn-sm btn-outline-secondary">
+                      Șterge
+                    </button>
                   </div>
                 </div>
               </div>

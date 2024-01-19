@@ -9,36 +9,28 @@ const SignUp = () => {
   const [lastName, setLastName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [role,setRole]=useState("PARTICIPANT");
+  const [role, setRole] = useState("PARTICIPANT");
   const navigate = useNavigate();
 
   // Funcția pentru gestionarea evenimentului de trimitere a formularului
   const handleSignUp = async (e) => {
     e.preventDefault();
-try{
-    await createUserWithEmailAndPassword(auth, email, password)
-    const response=await axios.post(
-      "http://localhost:9000/api/user",
-      {
+    try {
+      await createUserWithEmailAndPassword(auth, email, password);
+      const response = await axios.post("http://localhost:9000/api/user", {
         UserFirstName: firstName,
         UserLastName: lastName,
         UserEmail: email,
-        UserRole:role 
-      }
-    );
-        
-       console.log(response.data)
-        navigate("/signin");
-}
-        
-      
-      catch(error) {
-        const errorCode = error.code;
-        const errorMessage = error.message;
-        console.log(errorCode, errorMessage);
-      
-      };
+        UserRole: role,
+      });
 
+      console.log(response.data);
+      navigate("/login");
+    } catch (error) {
+      const errorCode = error.code;
+      const errorMessage = error.message;
+      console.log(errorCode, errorMessage);
+    }
 
     setFirstName("");
     setLastName("");
@@ -111,7 +103,11 @@ try{
             <label htmlFor="selectRole" className="form-label">
               Role
             </label>
-            <select className="form-select" id="selectRole" onChange={(e)=>setRole(e.target.value)}>
+            <select
+              className="form-select"
+              id="selectRole"
+              onChange={(e) => setRole(e.target.value)}
+            >
               <option value="PARTICIPANT">Participant</option>
               <option value="ORGANIZATOR">Event organizer</option>
             </select>

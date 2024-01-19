@@ -19,10 +19,9 @@ const Login = () => {
         "http://localhost:9000/api/user/email/" + email
       );
       const rol = response.data.users[0].UserRole;
-      // console.log("rol:" + response.data.users[0].UserRole);
 
       if (rol === "ORGANIZATOR") {
-        navigate("/manager");
+        navigate("/organizer");
       }
       if (rol === "PARTICIPANT") {
         navigate("/user");
