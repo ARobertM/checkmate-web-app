@@ -56,7 +56,7 @@ const UserEventChoose = ({ isOpen, onClose }) => {
             delay={300} 
             onError={handleError}
             onScan={handleQrScan}
-          />
+          /> 
         </Modal.Body>
       </Modal>
     </div>

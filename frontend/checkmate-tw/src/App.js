@@ -7,6 +7,7 @@ import Home from "./Components/Home/Home";
 import React, { useState } from 'react';
 import AddEvent from "./Components/Events/AddEvent";
 import HomeUser from "./Components/HomeUser/HomeUser";
+import AboutUs from "./Components/AboutUs/AboutUs";
 
 
 
@@ -15,13 +16,12 @@ function App() {
   return (
     <Router>
       <Routes>
-        <Route path="/signin" element={<LogIn/>} /> 
         <Route path="/signup" element={<SignUp/>} />
         <Route path="/login" element={<LogIn/>} />
-        <Route path="/manager" element={<Home/>}/>
+        <Route path="/organizer" element={<Home/>}/>
         <Route path="/addevent" element={<AddEvent/>}/>
         <Route path="/user" element={<HomeUser/>}/>
-        
+        <Route path="/aboutus" element={<AboutUs/>}/>
       </Routes>
     </Router>
   );

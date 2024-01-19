@@ -4,10 +4,23 @@ import axios from "axios";
 import { onAuthStateChanged } from "firebase/auth";
 import { auth } from "../../Firebase";
 import UserEventChoose from "../UserEventChoose/UserEventChoose"; // Importă UserEventChoose
+import { useNavigate } from "react-router-dom";
+
 
 const HomeUser = () => {
+
+ 
+
   const [date, setDate] = useState([]);
-  const [isUserEventChooseOpen, setIsUserEventChooseOpen] = useState(false); // Stadiu pentru controlul pop-up-ului
+  const [isUserEventChooseOpen, setIsUserEventChooseOpen] = useState(false);
+  const navigate = useNavigate();
+
+  function handleClick1() {
+    navigate("/login");
+  }
+  function handleClick() {
+    navigate("/aboutus");
+  }
 
   useEffect(() => {
     let email;
@@ -39,9 +52,9 @@ const HomeUser = () => {
   return (
     <div className="container">
       <div className="principal-container">
-        <button className="btn-aboutus-1">About Us</button>
+        <button className="btn-aboutus-1" onClick={handleClick}>About Us</button>
         <img className="logo" src="/logo_checkmate.png" alt="Checkmate Logo" />
-        <button className="btn-signout-1">Sign out</button>
+        <button className="btn-signout-1" onClick={handleClick1}>Sign out</button>
         <span className="title">
           <div className="title-description">
             <span className="title-text"> Welcome to, </span>
@@ -50,7 +63,7 @@ const HomeUser = () => {
         </span>
         <div className="username">
           User: {UserFirstName} {UserLastName}
-        </div>
+        </div>  
       </div>
       <div className="container-evenimente">
         <button className="green-button-1" onClick={openUserEventChooseModal}>
