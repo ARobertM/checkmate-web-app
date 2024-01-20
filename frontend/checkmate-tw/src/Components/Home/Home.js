@@ -9,6 +9,8 @@ import { faPlus } from "@fortawesome/free-solid-svg-icons";
 import axios from "axios";
 import { onAuthStateChanged } from "firebase/auth";
 import { auth } from "../../Firebase";
+import { signOut } from "firebase/auth";
+
 
 const Home = () => {
   const [showPopup, setShowPopup] = useState(false);
@@ -17,6 +19,18 @@ const Home = () => {
   const [qrCodeText, setQrCodeText] = useState(""); // Aici am modificat numele stării
   const [user, setUser] = useState({}); //variabila pentru stocarea deatelor despre user
   const navigate = useNavigate();
+  
+  const handleSignOut = async () => {
+    try {
+      await signOut(auth);
+      setUser({}); // golim stare user
+      navigate("/login");
+      console.log("User signed out");
+    } catch (error) {
+      console.error("Eroare la deconectare:", error);
+    }
+  };
+  
 
   useEffect(() => {
     let email;
@@ -105,7 +119,7 @@ const Home = () => {
           About Us
         </button>
         <img className="logo" src="/logo_checkmate.png" alt="Checkmate Logo" />
-        <button className="btn-signout">Sign out</button>
+        <button className="btn-signout" onClick={handleSignOut}>Sign out</button>
         <span className="title">
           <div className="title-description">
             <span className="title-text"> Welcome to, </span>

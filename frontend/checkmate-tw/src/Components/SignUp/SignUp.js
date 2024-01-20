@@ -119,7 +119,7 @@ const SignUp = () => {
           </div>
         </form>
         <p className="d-flex justify-content-center">
-          Already have an account? <NavLink to="/signin">Sign in</NavLink>
+          Already have an account? <NavLink to="/login">Login</NavLink>
         </p>
       </div>
     </div>

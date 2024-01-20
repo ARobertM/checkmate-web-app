@@ -26,6 +26,7 @@ const Login = () => {
       if (rol === "PARTICIPANT") {
         navigate("/user");
       }
+      
     } catch (error) {
       const errorCode = error.code;
       const message = error.message;
@@ -71,7 +72,7 @@ const Login = () => {
 
           <div className="d-flex justify-content-center">
             <button className="btn btn-primary col-11 mt-2 " type="submit">
-              Sign In
+              Login
             </button>
           </div>
           <div className="card-footer mt-3">

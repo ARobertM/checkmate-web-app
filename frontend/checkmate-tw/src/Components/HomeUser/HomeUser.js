@@ -3,23 +3,30 @@ import "./HomeUser.css";
 import axios from "axios";
 import { onAuthStateChanged } from "firebase/auth";
 import { auth } from "../../Firebase";
+import { signOut } from "firebase/auth";
 import UserEventChoose from "../UserEventChoose/UserEventChoose"; // Importă UserEventChoose
 import { useNavigate } from "react-router-dom";
 
 
 const HomeUser = () => {
-
- 
-
   const [date, setDate] = useState({});
   const [isUserEventChooseOpen, setIsUserEventChooseOpen] = useState(false);
   const navigate = useNavigate();
+  const [user, setOrg] = useState({});
 
   const[EventData,setEventData]=useState([])
 
-  function handleClick1() {
-    navigate("/login");
-  }
+  const handleSignOut = async () => {
+    try {
+      await signOut(auth);
+      setOrg({}); // golim stare organzier
+      navigate("/login");
+      console.log("Organizer signed out");
+    } catch (error) {
+      console.error("Eroare la deconectare:", error);
+    }
+  };
+
   function handleClick() {
     navigate("/aboutus");
   }
@@ -86,7 +93,7 @@ const HomeUser = () => {
       <div className="principal-container">
         <button className="btn-aboutus-1" onClick={handleClick}>About Us</button>
         <img className="logo" src="/logo_checkmate.png" alt="Checkmate Logo" />
-        <button className="btn-signout-1" onClick={handleClick1}>Sign out</button>
+        <button className="btn-signout-1" onClick={handleSignOut}>Sign out</button>
         <span className="title">
           <div className="title-description">
             <span className="title-text"> Welcome to, </span>
