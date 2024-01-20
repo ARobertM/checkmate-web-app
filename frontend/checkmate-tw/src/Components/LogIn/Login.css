@@ -1,0 +1,33 @@
+
+
+@import url('https://fonts.googleapis.com/css2?family=Bebas+Neue:wght@400;700&display=swap');
+
+.custom-font {
+  font-family: 'Bebas Neue', sans-serif;
+}
+
+.custom-card {
+    background-color: rgba(255, 255, 255, 0.5); /* Adjust transparency as needed */
+    backdrop-filter: blur(10px); /* Blur effect */
+    border-radius: 15px; /* Rounded corners for the card */
+  }
+  
+  .custom-input {
+    background-color: rgba(255, 255, 255, 0.5); /* Adjust transparency as needed */
+    border: 1px solid #ced4da; /* Bootstrap's default border color */
+    border-radius: 0.25rem; /* Rounded corners for input fields */
+  }
+  
+  .custom-button {
+    background-color: #007bff; /* Bootstrap primary color */
+    color: white; /* Text color */
+    border-radius: 0.25rem; /* Rounded corners for the button */
+    opacity: 0.7; /* Adjust button transparency */
+  }
+  
+  .custom-heading {
+    font-size: 1.5rem; /* Larger text */
+    font-weight: bold; /* Bold text */
+    color: #007bff; /* Same blue as the button */
+    margin-bottom: 1rem; /* Space below the heading */
+  }

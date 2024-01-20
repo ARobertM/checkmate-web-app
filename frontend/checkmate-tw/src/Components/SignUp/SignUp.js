@@ -3,6 +3,7 @@ import { NavLink, useNavigate } from "react-router-dom";
 import { createUserWithEmailAndPassword } from "firebase/auth";
 import { auth } from "../../Firebase";
 import axios from "axios";
+import "./SignUp.css";
 
 const SignUp = () => {
   const [firstName, setFirstName] = useState("");
@@ -39,40 +40,42 @@ const SignUp = () => {
   };
 
   return (
-    <div className="d-flex justify-content-center">
-      <div className="card col-sm-10 col-md-8 col-lg-6">
-        <h1 className="d-flex justify-content-center">Sign Up</h1>
+    <div className="d-flex justify-content-center mt-5">
+      <div className="card col-sm-10 col-md-8 col-lg-6 p-4 custom-card" style={{ opacity: '0.85', backdropFilter: 'blur(10px)' }}>
+      <h1 className="text-center text-primary custom-font">Create an account</h1>
         <form onSubmit={handleSignUp}>
           <div className="mb-3">
-            <label htmlFor="firstNameFormControl" className="form-label">
+            <label htmlFor="firstNameFormControl" className="custom-label-size">
               First Name
             </label>
             <input
               type="text"
-              className="form-control"
+              className="form-control rounded"
               id="firstNameFormControl"
               placeholder="First name"
               value={firstName}
               onChange={(e) => setFirstName(e.target.value)}
               required
+              style={{ backgroundColor: 'rgba(255, 255, 255, 0.5)' }}
             />
           </div>
           <div className="mb-3">
-            <label htmlFor="lastNameFormControl" className="form-label">
-              Last Name
-            </label>
-            <input
-              type="text"
-              className="form-control"
-              id="lastNameFormControl"
-              placeholder="Last name"
-              value={lastName}
-              onChange={(e) => setLastName(e.target.value)}
-              required
-            />
-          </div>
+          <label htmlFor="lastNameFormControl" className="custom-label-size">
+            Last Name
+          </label>
+          <input
+            type="text"
+            className="form-control rounded"
+            id="lastNameFormControl"
+            placeholder="Last name"
+            value={lastName}
+            onChange={(e) => setLastName(e.target.value)}
+            required
+            style={{ backgroundColor: 'rgba(255, 255, 255, 0.5)' }}
+          />
+        </div>
           <div className="mb-3">
-            <label htmlFor="emailFormControl" className="form-label">
+            <label htmlFor="emailFormControl" className="custom-label-size">
               Email
             </label>
             <input
@@ -86,7 +89,7 @@ const SignUp = () => {
             />
           </div>
           <div className="mb-3">
-            <label htmlFor="passwordFormControl" className="form-label">
+            <label htmlFor="passwordFormControl" className="custom-label-size">
               Password
             </label>
             <input
@@ -100,7 +103,7 @@ const SignUp = () => {
             />
           </div>
           <div className="mb-3">
-            <label htmlFor="selectRole" className="form-label">
+            <label htmlFor="selectRole" className="custom-label-size">
               Role
             </label>
             <select
@@ -113,14 +116,14 @@ const SignUp = () => {
             </select>
           </div>
           <div className="d-flex justify-content-center">
-            <button type="submit" className="btn btn-primary col-11 mt-2">
-              Sign Up
-            </button>
-          </div>
+          <button type="submit" className="btn btn-primary btn-lg rounded-pill col-11 mt-2">
+            Sign Up
+          </button>
+        </div>
         </form>
-        <p className="d-flex justify-content-center">
-          Already have an account? <NavLink to="/login">Login</NavLink>
-        </p>
+        <p className="text-center mt-3">
+        Already have an account? <NavLink to="/login" className="text-primary">Login</NavLink>
+      </p>
       </div>
     </div>
   );

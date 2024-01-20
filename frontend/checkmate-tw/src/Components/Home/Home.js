@@ -249,16 +249,11 @@ const Home = () => {
                     >
                       Șterge
                     </button>
-                    <button
-                      className="btn-export"
-                      onClick={() => handleExportData(event.eventId)}
-                    >
-                      Export
-                    </button>
+
                   </div>
                   <div className="col-1 mb-2">
                     <button
-                      className="btn-export"
+                      className="btn btn-sm btn-outline-secondary"
                       onClick={() => handleExportData(event.eventId)}
                     >
                       Export

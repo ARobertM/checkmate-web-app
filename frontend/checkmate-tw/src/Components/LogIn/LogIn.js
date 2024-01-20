@@ -3,6 +3,7 @@ import { NavLink, useNavigate } from "react-router-dom";
 import { signInWithEmailAndPassword } from "firebase/auth";
 import { auth } from "../../Firebase";
 import axios from "axios";
+import "./Login.css";
 
 const Login = () => {
   const [email, setEmail] = useState("");
@@ -39,15 +40,15 @@ const Login = () => {
 
   return (
     <div className="d-flex justify-content-center">
-      <div className="card col-sm-10 col-md-8 col-lg-6">
-        <h1 className="d-flex justify-content-center">Login</h1>
+      <div className="card custom-card col-sm-10 col-md-8 col-lg-6 ">
+        <h1 className="custom-heading d-flex justify-content-center">Login</h1>
         <form onSubmit={SignInHandleSubmit}>
-          <label htmlFor="emailFormControl" className="form-label mt-2 ">
+          <label htmlFor="emailFormControl" className="form-label mt-2 custom-label">
             Email
           </label>
           <input
             type="text"
-            className="form-control"
+            className="form-control custom-input"
             id="emailFormControl"
             placeholder="Email"
             value={email}
@@ -55,12 +56,12 @@ const Login = () => {
             required
           />
 
-          <label htmlFor="passwordFormControl" className="form-label mt-2">
+          <label htmlFor="passwordFormControl" className="form-label mt-2 custom-label">
             Password
           </label>
           <input
             type="password"
-            className="form-control"
+            className="form-control custom-input"
             id="passwordFormControl"
             placeholder="*****"
             value={password}
@@ -71,11 +72,11 @@ const Login = () => {
           {errorMessage && <div style={{ color: "red" }}>{errorMessage}</div>}
 
           <div className="d-flex justify-content-center">
-            <button className="btn btn-primary col-11 mt-2 " type="submit">
+            <button className="tn custom-button col-11 mt-2" type="submit">
               Login
             </button>
           </div>
-          <div className="card-footer mt-3">
+          <div className="card-footer mt-3 custom-footer">
             <NavLink to="/signup" className="btn btn-success col-12 mt-2">
               Create a new account
             </NavLink>

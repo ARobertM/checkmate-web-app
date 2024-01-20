@@ -1,0 +1,26 @@
+@import url('https://fonts.googleapis.com/css2?family=Bebas+Neue:wght@400;700&display=swap');
+
+.custom-font {
+  font-family: 'Bebas Neue', sans-serif;
+}
+
+/* SignUp.css */
+/* SignUp.css */
+.custom-label-size {
+    font-weight: bold; /* Bold text */
+    color: #0d6efd; /* Bootstrap 'text-primary' color */
+    font-size: 1.25rem; /* Setează dimensiunea fontului mai mare */
+  }
+  
+
+  .custom-card {
+    background-color: rgba(255, 255, 255, 0.5); /* sau orice altă valoare de opacitate între 0 și 1 */
+  }
+  
+  .custom-input {
+    background-color: rgba(255, 255, 255, 0.5); /* Ajustează transparența după preferințe */
+  }
+  
+  .custom-button {
+    background-color: rgba(0, 123, 255, 0.5); /* Presupunând că butonul este albastru bootstrap */
+  }
