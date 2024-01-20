@@ -78,7 +78,7 @@ const HomeUser = () => {
  }
  catch (error) {
   console.error("Eroare la preluarea datelor:", error);
-}}
+} }
 
   const handleSignOut = async () => {
     try {
