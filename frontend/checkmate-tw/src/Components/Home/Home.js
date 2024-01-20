@@ -19,6 +19,36 @@ const Home = () => {
   const [qrCodeText, setQrCodeText] = useState(""); // Aici am modificat numele stării
   const [user, setUser] = useState({}); //variabila pentru stocarea deatelor despre user
   const navigate = useNavigate();
+
+  const handleQRCodeScanned = async (userId) => {
+    try {
+      await axios.post('http://localhost:9000/api/scans', {
+        userId: userId,
+        scanTime: new Date() 
+      });
+    } catch (error) {
+      console.error('Eroare la salvarea scanării:', error);
+    }
+  };
+  
+
+  const handleExportData = async () => {
+    try {
+      const response = await axios.get('http://localhost:9000/api/export-scans', {
+        responseType: 'blob', // Important pentru a primi fișierul
+      });
+      const url = window.URL.createObjectURL(new Blob([response.data]));
+      const link = document.createElement('a');
+      link.href = url;
+      link.setAttribute('download', 'Scans.csv'); 
+      document.body.appendChild(link);
+      link.click();
+    } catch (error) {
+      console.error('Eroare la exportul datelor:', error);
+    }
+  };
+  
+  
   
   const handleSignOut = async () => {
     try {
@@ -203,6 +233,7 @@ const Home = () => {
                     >
                       Cod acces
                     </button>
+
                     {showQRCodePopup && (
                       <QRCodeModal
                         show={showQRCodePopup}
@@ -217,6 +248,20 @@ const Home = () => {
                       onClick={() => handleDeleteEvent(event.eventId)}
                     >
                       Șterge
+                    </button>
+                    <button
+                      className="btn-export"
+                      onClick={() => handleExportData(event.eventId)}
+                    >
+                      Export
+                    </button>
+                  </div>
+                  <div className="col-1 mb-2">
+                    <button
+                      className="btn-export"
+                      onClick={() => handleExportData(event.eventId)}
+                    >
+                      Export
                     </button>
                   </div>
                 </div>
