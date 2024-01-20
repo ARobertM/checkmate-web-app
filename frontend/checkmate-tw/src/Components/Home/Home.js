@@ -31,19 +31,19 @@ const Home = () => {
             "http://localhost:9000/api/user/email/" + email
           );
           setUser(response.data.users[0]);
-         
+
           const eventResponse = await axios.get(
-            "http://localhost:9000/api/events/user/" +
+            "http://localhost:9000/api/events/organizer/" +
               response.data.users[0].UserId
           );
-          
+
           const events = eventResponse.data.events.map((event) => {
             let startHours = new Date(event.EventStartDate).getHours();
             let startMinutes = new Date(event.EventStartDate).getMinutes();
             let endHours = new Date(event.EventEndDate).getHours();
             let endMinutes = new Date(event.EventEndDate).getMinutes();
             return {
-              eventId:event.EventId,
+              eventId: event.EventId,
               eventName: event.EventName,
               eventDescription: event.EventDescription,
               eventDateStart: new Date(event.EventStartDate),
@@ -69,17 +69,19 @@ const Home = () => {
       };
       fetchData();
     });
-  }, [setUser]);
+  }, []);
 
   const handleSaveEvent = (data) => {
     setEventData((prevEvents) => [...prevEvents, data]);
     setShowPopup(false);
   };
 
-  const handleDeleteEvent = async(id)=>{
-    await axios.delete('http://localhost:9000/api/event/'+id)
-    setEventData(prevData => prevData.filter(event => event.eventId !== id));
-  }
+  const handleDeleteEvent = async (id) => {
+    await axios.delete("http://localhost:9000/api/event/" + id);
+    setEventData((prevData) =>
+      prevData.filter((event) => event.eventId !== id)
+    );
+  };
 
   const handleShowQRCodeModal = (qrCodeText) => {
     // Am modificat funcția
@@ -94,7 +96,14 @@ const Home = () => {
   return (
     <div className="container">
       <div className="principal-container">
-        <button className="btn-aboutus" onClick={()=>{navigate("/aboutus")}}>About Us</button>
+        <button
+          className="btn-aboutus"
+          onClick={() => {
+            navigate("/aboutus");
+          }}
+        >
+          About Us
+        </button>
         <img className="logo" src="/logo_checkmate.png" alt="Checkmate Logo" />
         <button className="btn-signout">Sign out</button>
         <span className="title">
@@ -118,20 +127,25 @@ const Home = () => {
               console.log(data.eventDateStart);
               console.log(data.eventDateEnd);
 
-             const response=await axios.post("http://localhost:9000/api/event", {
-                EventName: data.eventName,
-                EventDescription: data.eventDescription,
-                EventStartDate: data.eventDateStart,
-                EventEndDate: data.eventDateEnd,
-                EventStatus: data.meetingOption,
-                EventCodAccess: data.accessCode,
-                GroupId: 1,
-                UserId: user.UserId,
-              });
-              data.eventId=response.data.event.EventId
-             
-              handleSaveEvent(data);
-              handleShowQRCodeModal(data.accesCode);
+              const response = await axios.post(
+                "http://localhost:9000/api/event",
+                {
+                  EventName: data.eventName,
+                  EventDescription: data.eventDescription,
+                  EventStartDate: data.eventDateStart,
+                  EventEndDate: data.eventDateEnd,
+                  EventStatus: data.meetingOption,
+                  EventCodAccess: data.accessCode,
+                  GroupId: 1,
+                  UserId: user.UserId,
+                }
+              );
+              if (response.data.success) {
+                data.eventId = response.data.event.EventId;
+
+                handleSaveEvent(data);
+                handleShowQRCodeModal(data.accesCode);
+              }
             }}
             onClose={() => setShowPopup(false)}
           />
@@ -184,7 +198,9 @@ const Home = () => {
                     )}
                   </div>
                   <div className="col-1 mb-2">
-                    <button className="btn btn-sm btn-outline-secondary" onClick={()=>handleDeleteEvent(event.eventId) } 
+                    <button
+                      className="btn btn-sm btn-outline-secondary"
+                      onClick={() => handleDeleteEvent(event.eventId)}
                     >
                       Șterge
                     </button>

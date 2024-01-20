@@ -11,9 +11,11 @@ const HomeUser = () => {
 
  
 
-  const [date, setDate] = useState([]);
+  const [date, setDate] = useState({});
   const [isUserEventChooseOpen, setIsUserEventChooseOpen] = useState(false);
   const navigate = useNavigate();
+
+  const[EventData,setEventData]=useState([])
 
   function handleClick1() {
     navigate("/login");
@@ -35,6 +37,36 @@ const HomeUser = () => {
             "http://localhost:9000/api/user/email/" + email
           );
           setDate(response.data.users[0]);
+
+          const eventResponse=await axios.get('http://localhost:9000/api/events/user/'+response.data.users[0].UserId)
+          const events = eventResponse.data.events.map((event) => {
+            let startHours = new Date(event.EventStartDate).getHours();
+            let startMinutes = new Date(event.EventStartDate).getMinutes();
+            let endHours = new Date(event.EventEndDate).getHours();
+            let endMinutes = new Date(event.EventEndDate).getMinutes();
+            return {
+              eventId: event.EventId,
+              eventName: event.EventName,
+              eventDescription: event.EventDescription,
+              eventDateStart: new Date(event.EventStartDate),
+              eventDateEnd: new Date(event.EventEndDate),
+              meetingOption: event.EventStatus,
+              repeatOption: "Never",
+              repeatDays: 1,
+              accessCode: event.EventCodAccess,
+              startTime:
+                startHours +
+                ":" +
+                (startMinutes < 10 ? "0" + startMinutes : startMinutes),
+              endTime:
+                endHours +
+                ":" +
+                (endMinutes < 10 ? "0" + endMinutes : endMinutes),
+            };
+          });
+          setEventData(events)
+          console.log(events)
+
         } catch (error) {
           console.error("Eroare la preluarea datelor:", error);
         }
@@ -73,7 +105,61 @@ const HomeUser = () => {
           isOpen={isUserEventChooseOpen}
           onClose={() => setIsUserEventChooseOpen(false)}
         />
+
+       
       </div>
+      <div className="mt-3">
+          {EventData.map((event, index) => (
+            <div key={index} className="card mb-2 event-card">
+              <div className="card-body p-2">
+                <div className="row align-items-center">
+                  <div className="col-2 font-weight-bold">
+                    {event.eventName}
+                  </div>
+                  <div className="col-2 mb-2">
+                    {event.eventDateStart.toDateString()}
+                  </div>
+                  <div className="col-2 mb-2">
+                    {`${event.startTime} - ${event.endTime}`}
+                  </div>
+                  <div className="col-2 mb-2">
+                    {event.repeatOption === "Never"
+                      ? "Va avea loc o singura data"
+                      : `Va avea loc zilnic ${event.repeatDays} zile`}
+                  </div>
+                  <div className="col-1 mb-2">{event.eventDescription}</div>
+                  <div className="col-1 mb-2">
+                    <span
+                      className={`status ${
+                        event.meetingOption === "OPEN"
+                          ? "text-success"
+                          : "text-danger"
+                      }`}
+                    >
+                      {event.meetingOption.toUpperCase()}
+                    </span>
+                  </div>
+                 
+                  <div className="col-1 mb-2">
+                    <button
+                      className="btn btn-sm btn-outline-secondary"
+                      
+                    >
+                      Șterge
+                    </button>
+                  </div>
+                  <div className="col-1 mb-2">
+                    <span
+                      className="status text-success"
+                    >
+                      JOINED
+                    </span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          ))}
+        </div>
     </div>
   );
 };

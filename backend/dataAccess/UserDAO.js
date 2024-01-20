@@ -51,7 +51,7 @@ async function getUsersForEvent(eventId) {
       include: [
         {
           model: User,
-          as: "Users", // Asocierea definită în model
+          as: "Users", 
         },
       ],
     });

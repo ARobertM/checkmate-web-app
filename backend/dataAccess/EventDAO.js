@@ -1,4 +1,5 @@
 import Event from "../entities/Event.js";
+import User from "../entities/User.js";
 
 async function getAllEvents() {
   try {
@@ -102,6 +103,27 @@ async function deleteEventById(eventId) {
 
 
 //select pentru toate evenimentele la care participa un user
+async function getEventsForUser(id) {
+  try {
+    const user = await User.findByPk(id, {
+      include: [
+        {
+          model: Event,
+          as: "Events", // Asocierea definită în model
+        },
+      ],
+    });
+
+    const events = user.Events;
+
+    return { success: true, events:events };
+  } catch (error) {
+    console.error("Eroare ", error);
+    return {
+      success: false,
+    };
+  }
+}
 
 export {
   getAllEvents,
@@ -110,5 +132,6 @@ export {
   getEventsByUserId,
   getEventsByGroup,
   updateEventStatus,
-  deleteEventById
+  deleteEventById,
+  getEventsForUser
 };
