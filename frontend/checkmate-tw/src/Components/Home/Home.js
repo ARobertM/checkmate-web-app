@@ -10,6 +10,8 @@ import axios from "axios";
 import { onAuthStateChanged } from "firebase/auth";
 import { auth } from "../../Firebase";
 import { signOut } from "firebase/auth";
+import AttendanceListModal from "../AttendaceListModal/AttendaceListModal";
+
 
 
 const Home = () => {
@@ -19,6 +21,8 @@ const Home = () => {
   const [qrCodeText, setQrCodeText] = useState(""); // Aici am modificat numele stării
   const [user, setUser] = useState({}); //variabila pentru stocarea deatelor despre user
   const navigate = useNavigate();
+  const[attendaceList,setAttendaceList]=useState([])
+  const [showAttendaceList, setShowAttendaceList] = useState(false);
   
   const handleSignOut = async () => {
     try {
@@ -106,6 +110,12 @@ const Home = () => {
   const handleCloseQRCodePopup = () => {
     setShowQRCodePopup(false); // Închidem pop-up-ul
   };
+  const handleAttendaceList=async(id)=>{
+    const response=await axios.get('http://localhost:9000/api/event/'+id+'/users')
+    console.log(response.data)
+    setAttendaceList(response.data.users)
+    setShowAttendaceList(true)
+  }
 
   return (
     <div className="container">
@@ -184,7 +194,7 @@ const Home = () => {
                       ? "Va avea loc o singura data"
                       : `Va avea loc zilnic ${event.repeatDays} zile`}
                   </div>
-                  <div className="col-1 mb-2">{event.eventDescription}</div>
+                 
                   <div className="col-1 mb-2">
                     <span
                       className={`status ${
@@ -199,7 +209,24 @@ const Home = () => {
                   <div className="col-1 mb-2">
                     <button
                       className="btn btn-sm btn-outline-secondary"
+                      onClick={() => handleAttendaceList(event.eventId)}
+                    >
+                      Participanți
+                    </button>
+                    {showAttendaceList&&
+                    <AttendanceListModal 
+                    show={showAttendaceList}
+                    onClose={()=>setShowAttendaceList(false)}
+                    attendacelist={attendaceList}
+                    >
+                      
+                      </AttendanceListModal>}
+                  </div>
+                  <div className="col-1 mb-2">
+                    <button
+                      className="btn btn-sm btn-outline-secondary"
                       onClick={() => handleShowQRCodeModal(event.accessCode)}
+                      
                     >
                       Cod acces
                     </button>
