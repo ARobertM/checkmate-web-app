@@ -10,7 +10,7 @@ import axios from "axios";
 import { onAuthStateChanged } from "firebase/auth";
 import { auth } from "../../Firebase";
 import { signOut } from "firebase/auth";
-
+import AttendanceListModal from "../AttendaceListModal/AttendaceListModal";
 
 const Home = () => {
   const [showPopup, setShowPopup] = useState(false);
@@ -19,37 +19,20 @@ const Home = () => {
   const [qrCodeText, setQrCodeText] = useState(""); // Aici am modificat numele stării
   const [user, setUser] = useState({}); //variabila pentru stocarea deatelor despre user
   const navigate = useNavigate();
+  const [attendaceList, setAttendaceList] = useState([]);
+  const [showAttendaceList, setShowAttendaceList] = useState(false);
 
   const handleQRCodeScanned = async (userId) => {
     try {
-      await axios.post('http://localhost:9000/api/scans', {
+      await axios.post("http://localhost:9000/api/scans", {
         userId: userId,
-        scanTime: new Date() 
+        scanTime: new Date(),
       });
     } catch (error) {
-      console.error('Eroare la salvarea scanării:', error);
+      console.error("Eroare la salvarea scanării:", error);
     }
   };
-  
 
-  const handleExportData = async () => {
-    try {
-      const response = await axios.get('http://localhost:9000/api/export-scans', {
-        responseType: 'blob', // Important pentru a primi fișierul
-      });
-      const url = window.URL.createObjectURL(new Blob([response.data]));
-      const link = document.createElement('a');
-      link.href = url;
-      link.setAttribute('download', 'Scans.csv'); 
-      document.body.appendChild(link);
-      link.click();
-    } catch (error) {
-      console.error('Eroare la exportul datelor:', error);
-    }
-  };
-  
-  
-  
   const handleSignOut = async () => {
     try {
       await signOut(auth);
@@ -60,7 +43,6 @@ const Home = () => {
       console.error("Eroare la deconectare:", error);
     }
   };
-  
 
   useEffect(() => {
     let email;
@@ -136,6 +118,14 @@ const Home = () => {
   const handleCloseQRCodePopup = () => {
     setShowQRCodePopup(false); // Închidem pop-up-ul
   };
+  const handleAttendaceList = async (id) => {
+    const response = await axios.get(
+      "http://localhost:9000/api/event/" + id + "/users"
+    );
+    console.log(response.data);
+    setAttendaceList(response.data.users);
+    setShowAttendaceList(true);
+  };
 
   return (
     <div className="container">
@@ -149,7 +139,9 @@ const Home = () => {
           About Us
         </button>
         <img className="logo" src="/logo_checkmate.png" alt="Checkmate Logo" />
-        <button className="btn-signout" onClick={handleSignOut}>Sign out</button>
+        <button className="btn-signout" onClick={handleSignOut}>
+          Sign out
+        </button>
         <span className="title">
           <div className="title-description">
             <span className="title-text"> Welcome to, </span>
@@ -214,7 +206,7 @@ const Home = () => {
                       ? "Va avea loc o singura data"
                       : `Va avea loc zilnic ${event.repeatDays} zile`}
                   </div>
-                  <div className="col-1 mb-2">{event.eventDescription}</div>
+
                   <div className="col-1 mb-2">
                     <span
                       className={`status ${
@@ -225,6 +217,21 @@ const Home = () => {
                     >
                       {event.meetingOption.toUpperCase()}
                     </span>
+                  </div>
+                  <div className="col-1 mb-2">
+                    <button
+                      className="btn btn-sm btn-outline-secondary"
+                      onClick={() => handleAttendaceList(event.eventId)}
+                    >
+                      Participanți
+                    </button>
+                    {showAttendaceList && (
+                      <AttendanceListModal
+                        show={showAttendaceList}
+                        onClose={() => setShowAttendaceList(false)}
+                        attendacelist={attendaceList}
+                      ></AttendanceListModal>
+                    )}
                   </div>
                   <div className="col-1 mb-2">
                     <button
@@ -248,15 +255,6 @@ const Home = () => {
                       onClick={() => handleDeleteEvent(event.eventId)}
                     >
                       Șterge
-                    </button>
-
-                  </div>
-                  <div className="col-1 mb-2">
-                    <button
-                      className="btn btn-sm btn-outline-secondary"
-                      onClick={() => handleExportData(event.eventId)}
-                    >
-                      Export
                     </button>
                   </div>
                 </div>

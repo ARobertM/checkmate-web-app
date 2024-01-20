@@ -83,9 +83,8 @@ const HomeUser = () => {
   const handleSignOut = async () => {
     try {
       await signOut(auth);
-      //setOrg({}); // golim stare organzier
       navigate("/login");
-      console.log("Organizer signed out");
+     
     } catch (error) {
       console.error("Eroare la deconectare:", error);
     }
