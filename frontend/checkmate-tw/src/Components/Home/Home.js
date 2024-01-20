@@ -144,7 +144,7 @@ const Home = () => {
                 data.eventId = response.data.event.EventId;
 
                 handleSaveEvent(data);
-                handleShowQRCodeModal(data.accesCode);
+                handleShowQRCodeModal(response.data.event.EventCodAccess);
               }
             }}
             onClose={() => setShowPopup(false)}
@@ -185,7 +185,7 @@ const Home = () => {
                   <div className="col-1 mb-2">
                     <button
                       className="btn btn-sm btn-outline-secondary"
-                      onClick={() => handleShowQRCodeModal(event.accesCode)}
+                      onClick={() => handleShowQRCodeModal(event.accessCode)}
                     >
                       Cod acces
                     </button>

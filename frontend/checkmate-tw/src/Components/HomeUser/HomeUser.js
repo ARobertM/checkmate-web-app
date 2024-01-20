@@ -11,11 +11,14 @@ const HomeUser = () => {
 
  
 
-  const [date, setDate] = useState({});
+  const [date, setDate] = useState([]);
   const [isUserEventChooseOpen, setIsUserEventChooseOpen] = useState(false);
   const navigate = useNavigate();
+  const [cod,SetCod]=useState('')
 
   const[EventData,setEventData]=useState([])
+
+ 
 
   function handleClick1() {
     navigate("/login");
@@ -104,6 +107,7 @@ const HomeUser = () => {
         <UserEventChoose
           isOpen={isUserEventChooseOpen}
           onClose={() => setIsUserEventChooseOpen(false)}
+          
         />
 
        
