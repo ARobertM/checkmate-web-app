@@ -3,13 +3,13 @@ import Modal from "react-bootstrap/Modal";
 import { QrReader } from 'react-qr-reader';
  
 
-const UserEventChoose = ({ isOpen,onClose,handleCodeInput }) => {
+const UserEventChoose = ({ isOpen,onClose,handleCod }) => {
  
 
 
 
-
-  const [qrData, setQrData] = useState(null); // State pentru a stoca datele citite din codul QR
+  const[cod,setCod]=useState('');
+  const [textOption, setTextOption] = useState(false); // State pentru a stoca datele citite din codul QR
   const [QrOption,setQrOption]=useState(false)
 
 
@@ -17,22 +17,23 @@ const UserEventChoose = ({ isOpen,onClose,handleCodeInput }) => {
  
 const handleClose=()=>{
   setQrOption(false)
+  setTextOption(false)
   onClose()
 }
   // Funcție pentru a gestiona citirea codului QR
   const handleQrScan =  (data) => {
     if (data) {
-      
-      setQrData(data.text);
-      
-     
-      //console.log(data)
-      console.log(qrData)
+
+      handleCod(data.text);
       handleClose()
       
       
     }
   };
+  const handleSubmit=()=>{
+    handleCod(cod)
+    handleClose()
+  }
 
   const handleError = (error) => {
     console.error("Eroare la citirea codului QR:", error);
@@ -62,6 +63,7 @@ const handleClose=()=>{
             style={{
               backgroundColor: "rgb(252, 0, 168)",
             }}
+            onClick={()=>setTextOption(true)}
             
           >
              Text Code
@@ -73,6 +75,27 @@ const handleClose=()=>{
           onError={handleError}
           onResult={handleQrScan}
           /> }
+          {textOption&&
+          <form onSubmit={handleSubmit}>
+            <div className="mb-3">
+            <label htmlFor="formCod" className="form-label">
+               Text Code:
+            </label>
+            <input
+              type="text"
+              className="form-control"
+              id="formCod"
+              placeholder="Code"
+              onChange={(e) => setCod(e.target.value)}
+              required
+            />
+            <button type="submit" className="btn btn-primary " style={{
+              backgroundColor: "rgb(252, 0, 168)",
+            }}>
+              Search
+            </button>
+          </div>
+            </form>}
          
         </Modal.Body>
       </Modal>

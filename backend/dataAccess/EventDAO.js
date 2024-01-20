@@ -124,6 +124,20 @@ async function getEventsForUser(id) {
     };
   }
 }
+async function getEventsByAccess(code) {
+  try {
+    const events = await Event.findAll({
+      where: {
+        EventCodAccess: code,
+      },
+    });
+
+    return { success: true, events: events };
+  } catch (error) {
+    console.error("Eroare :", error);
+    return { success: false};
+  }
+}
 
 export {
   getAllEvents,
@@ -133,5 +147,6 @@ export {
   getEventsByGroup,
   updateEventStatus,
   deleteEventById,
-  getEventsForUser
+  getEventsForUser,
+  getEventsByAccess
 };

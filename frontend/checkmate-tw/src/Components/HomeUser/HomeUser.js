@@ -17,13 +17,73 @@ const HomeUser = () => {
   const navigate = useNavigate();
 
   const[EventData,setEventData]=useState([])
+  const[joinConfirm,setJoinConfirm]=useState(false)
+  const[joinError,setJoinError]=useState(false)
+  const[existingEvent,setExistingEvent]=useState(false)
 
+ const[cod,setCod]=useState('');
  
+ const getEventbyCode=async(cod)=>{
+  try {
+    
+    const response = await axios.get(
+      "http://localhost:9000/api/events/code/" + cod
+    );
+    //console.log(response.data.events[0])
+    
+    if(response.data.events.length!=0)
+    {
+      const attendace=await axios.post('http://localhost:9000/api/attendace',{UserId:UserId,EventId:response.data.events[0].EventId,AttendanceListCreateDate:new Date()})
+      
+      if(attendace.data.succes){
+      const eventResponse = response.data.events.map((event) => {
+        let startHours = new Date(event.EventStartDate).getHours();
+        let startMinutes = new Date(event.EventStartDate).getMinutes();
+        let endHours = new Date(event.EventEndDate).getHours();
+        let endMinutes = new Date(event.EventEndDate).getMinutes();
+        return {
+          eventId: event.EventId,
+          eventName: event.EventName,
+          eventDescription: event.EventDescription,
+          eventDateStart: new Date(event.EventStartDate),
+          eventDateEnd: new Date(event.EventEndDate),
+          meetingOption: event.EventStatus,
+          repeatOption: "Never",
+          repeatDays: 1,
+          accessCode: event.EventCodAccess,
+          startTime:
+            startHours +
+            ":" +
+            (startMinutes < 10 ? "0" + startMinutes : startMinutes),
+          endTime:
+            endHours +
+            ":" +
+            (endMinutes < 10 ? "0" + endMinutes : endMinutes),
+        };
+      });
+      
+      setEventData((prevEvents) => [...prevEvents, eventResponse[0]]);
+      setJoinConfirm(true)
+      setTimeout(()=>setJoinConfirm(false),5000)
+    }
+    else{
+      setExistingEvent(true)
+      setTimeout(()=>setExistingEvent(false),5000)
+    }
+    }
+    else {
+      setJoinError(true)
+      setTimeout(()=>setJoinError(false),5000)
+    }
+ }
+ catch (error) {
+  console.error("Eroare la preluarea datelor:", error);
+}}
 
   const handleSignOut = async () => {
     try {
       await signOut(auth);
-      setOrg({}); // golim stare organzier
+      //setOrg({}); // golim stare organzier
       navigate("/login");
       console.log("Organizer signed out");
     } catch (error) {
@@ -76,7 +136,7 @@ const HomeUser = () => {
             };
           });
           setEventData(events)
-          console.log(events)
+          //console.log(events)
 
         } catch (error) {
           console.error("Eroare la preluarea datelor:", error);
@@ -86,7 +146,7 @@ const HomeUser = () => {
     });
   }, []);
 
-  const { UserFirstName, UserLastName, UserRole } = date;
+  const { UserFirstName, UserLastName, UserRole,UserId } = date;
 
   const openUserEventChooseModal = () => {
     setIsUserEventChooseOpen(true);
@@ -106,8 +166,19 @@ const HomeUser = () => {
         </span>
         <div className="username">
           User: {UserFirstName} {UserLastName}
-        </div>  
+        </div>
+        {joinConfirm &&<div className="d-flex mt-4  justify-content-center status text-success"> 
+        <p >Join corfirmation: Event was added to the list!</p> 
+        </div>}
+        {joinError &&<div className="d-flex mt-4  justify-content-center status text-danger"> 
+        <p >Event was not found!</p> 
+        </div>}
+        {existingEvent &&<div className="d-flex mt-4  justify-content-center status text-danger"> 
+        <p >You already joined this event!</p> 
+        </div>}
+        
       </div>
+     
       <div className="container-evenimente">
         <button className="green-button-1" onClick={openUserEventChooseModal}>
           Add Event
@@ -115,11 +186,13 @@ const HomeUser = () => {
         <UserEventChoose
           isOpen={isUserEventChooseOpen}
           onClose={() => setIsUserEventChooseOpen(false)}
-          
+          handleCod={(cod)=>{setCod(cod)
+          getEventbyCode(cod)}}
         />
 
        
       </div>
+      
       <div className="mt-3">
           {EventData.map((event, index) => (
             <div key={index} className="card mb-2 event-card">
@@ -152,14 +225,14 @@ const HomeUser = () => {
                     </span>
                   </div>
                  
-                  <div className="col-1 mb-2">
+                  {/*<div className="col-1 mb-2">
                     <button
                       className="btn btn-sm btn-outline-secondary"
                       
                     >
                       Șterge
                     </button>
-                  </div>
+                    </div>*/}
                   <div className="col-1 mb-2">
                     <span
                       className="status text-success"

@@ -1,5 +1,5 @@
 import express from 'express';
-import {getAllEvents,getEventById,createEvent,getEventsByUserId,getEventsByGroup,updateEventStatus,deleteEventById,getEventsForUser} from '../dataAccess/EventDAO.js';
+import {getAllEvents,getEventById,createEvent,getEventsByUserId,getEventsByGroup,updateEventStatus,deleteEventById,getEventsForUser,getEventsByAccess} from '../dataAccess/EventDAO.js';
 
 let eventRouter = express.Router();
 
@@ -26,6 +26,9 @@ eventRouter.route('/event/:id').delete(async (req, res) => {
 })
 eventRouter.route('/events/user/:id').get(async (req, res) => {
     return res.json(await getEventsForUser(req.params.id));
+})
+eventRouter.route('/events/code/:code').get(async (req, res) => {
+    return res.json(await getEventsByAccess(req.params.code));
 })
 
 
