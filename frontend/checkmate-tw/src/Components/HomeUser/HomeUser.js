@@ -9,12 +9,16 @@ import { useNavigate } from "react-router-dom";
 
 
 const HomeUser = () => {
+
+ 
+
   const [date, setDate] = useState({});
   const [isUserEventChooseOpen, setIsUserEventChooseOpen] = useState(false);
   const navigate = useNavigate();
-  const [user, setOrg] = useState({});
 
   const[EventData,setEventData]=useState([])
+
+ 
 
   const handleSignOut = async () => {
     try {
@@ -111,6 +115,7 @@ const HomeUser = () => {
         <UserEventChoose
           isOpen={isUserEventChooseOpen}
           onClose={() => setIsUserEventChooseOpen(false)}
+          
         />
 
        

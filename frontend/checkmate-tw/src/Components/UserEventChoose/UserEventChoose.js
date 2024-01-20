@@ -3,44 +3,58 @@ import Modal from "react-bootstrap/Modal";
 import { QrReader } from 'react-qr-reader';
  
 
-const UserEventChoose = ({ isOpen, onClose }) => {
-  const [selectedEvent, setSelectedEvent] = useState(null);
+const UserEventChoose = ({ isOpen,onClose,handleCodeInput }) => {
+ 
+
+
+
+
   const [qrData, setQrData] = useState(null); // State pentru a stoca datele citite din codul QR
+  const [QrOption,setQrOption]=useState(false)
 
-  const handleEventSelection = (eventType) => {
-    setSelectedEvent(eventType);
-    onClose();
-  };
 
+
+ 
+const handleClose=()=>{
+  setQrOption(false)
+  onClose()
+}
   // Funcție pentru a gestiona citirea codului QR
-  const handleQrScan = (data) => {
+  const handleQrScan =  (data) => {
     if (data) {
-      setQrData(data);
-      onClose(); // Închide modalul după ce se citește codul QR cu succes
+      
+      setQrData(data.text);
+      
+     
+      //console.log(data)
+      console.log(qrData)
+      handleClose()
+      
+      
     }
   };
 
-  // Funcție pentru gestionarea erorilor la citirea codului QR
   const handleError = (error) => {
     console.error("Eroare la citirea codului QR:", error);
   };
 
   return (
     <div>
-      <Modal show={isOpen} onHide={onClose} contentLabel="Event Type Modal">
-        <Modal.Header closeButton></Modal.Header>
+      <Modal show={isOpen} onHide={handleClose}  >
+        <Modal.Header closeButton ></Modal.Header>
         <Modal.Body className="text-center">
-          <h2>Choose Event Type</h2>
-          <button
+          <h2>Choose code type</h2>
+           <button
             type="button"
             className="btn btn-primary"
             style={{
               backgroundColor: "rgb(252, 0, 168)",
               marginRight: "10px",
             }}
-            onClick={() => handleEventSelection("QR Code Scan")}
+            onClick={()=>setQrOption(true)}
+           
           >
-            QR Code Scan
+            QR Code 
           </button>
           <button
             type="button"
@@ -48,15 +62,18 @@ const UserEventChoose = ({ isOpen, onClose }) => {
             style={{
               backgroundColor: "rgb(252, 0, 168)",
             }}
-            onClick={() => handleEventSelection("Input Text")}
+            
           >
-            Input Text
-          </button>        
+             Text Code
+          </button>  
+           {QrOption &&     
           <QrReader
-            delay={300} 
-            onError={handleError}
-            onScan={handleQrScan}
-          /> 
+          
+          style={{width: '100%'}}
+          onError={handleError}
+          onResult={handleQrScan}
+          /> }
+         
         </Modal.Body>
       </Modal>
     </div>
