@@ -1,6 +1,6 @@
-# Checkmates
 
 <p align="center">
+  Checkmates Project
   <img src="/frontend/checkmate-tw/public/logo_checkmate.png" alt="Logo Checkmate">
 </p>
 
