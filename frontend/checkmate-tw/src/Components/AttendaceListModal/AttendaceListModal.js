@@ -52,15 +52,17 @@ const AttendanceListModal = ({ show, onClose, attendacelist }) => {
           </div>
         </Modal.Body>
         <ModalFooter>
-          <div className="mb-2">
-            <CSVLink
-              className="btn btn-primary"
-              filename="Attendace.csv"
-              data={csvData}
-            >
-              Export to CSV
-            </CSVLink>
-          </div>
+          {attendacelist.length > 0 && (
+            <div className="mb-2">
+              <CSVLink
+                className="btn btn-primary"
+                filename="Attendace.csv"
+                data={csvData}
+              >
+                Export to CSV
+              </CSVLink>
+            </div>
+          )}
         </ModalFooter>
       </Modal>
     </div>
