@@ -47,6 +47,6 @@ We are open to contributions! If you want to improve or add new features, please
 
 ## License
 
-Distributed under the Checkmate Project
+Distributed under the Checkmate Project License
 
 
