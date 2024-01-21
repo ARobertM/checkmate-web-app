@@ -22,16 +22,7 @@ const Home = () => {
   const [attendaceList, setAttendaceList] = useState([]);
   const [showAttendaceList, setShowAttendaceList] = useState(false);
 
-  const handleQRCodeScanned = async (userId) => {
-    try {
-      await axios.post("http://localhost:9000/api/scans", {
-        userId: userId,
-        scanTime: new Date(),
-      });
-    } catch (error) {
-      console.error("Eroare la salvarea scanării:", error);
-    }
-  };
+  
 
   const handleSignOut = async () => {
     try {
@@ -230,6 +221,7 @@ const Home = () => {
                         show={showAttendaceList}
                         onClose={() => setShowAttendaceList(false)}
                         attendacelist={attendaceList}
+                        eventName={event.eventName}
                       ></AttendanceListModal>
                     )}
                   </div>

@@ -3,7 +3,7 @@ import Modal from "react-bootstrap/Modal";
 import ModalFooter from "react-bootstrap/esm/ModalFooter";
 import { CSVLink } from "react-csv";
 
-const AttendanceListModal = ({ show, onClose, attendacelist }) => {
+const AttendanceListModal = ({ show, onClose, attendacelist,eventName }) => {
   const csvData = [
     ["FirstName", "LastName", "Email", "Date", "Hour"],
     ...attendacelist.map(
@@ -56,7 +56,7 @@ const AttendanceListModal = ({ show, onClose, attendacelist }) => {
             <div className="mb-2">
               <CSVLink
                 className="btn btn-primary"
-                filename="Attendace.csv"
+                filename={"Attendace_"+eventName+"_Event.csv"}
                 data={csvData}
               >
                 Export to CSV

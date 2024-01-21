@@ -167,7 +167,7 @@ const HomeUser = () => {
           User: {UserFirstName} {UserLastName}
         </div>
         {joinConfirm &&<div className="d-flex mt-4  justify-content-center status text-success"> 
-        <p >Join corfirmation: Event was added to the list!</p> 
+        <p >Join confirmation: Event was added to the list!</p> 
         </div>}
         {joinError &&<div className="d-flex mt-4  justify-content-center status text-danger"> 
         <p >Event was not found!</p> 
@@ -180,7 +180,7 @@ const HomeUser = () => {
      
       <div className="container-evenimente">
         <button className="green-button-1" onClick={openUserEventChooseModal}>
-          Add Event
+          Join Event
         </button>
         <UserEventChoose
           isOpen={isUserEventChooseOpen}
