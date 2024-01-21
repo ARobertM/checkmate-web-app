@@ -56,7 +56,7 @@ const AttendanceListModal = ({ show, onClose, attendacelist,eventName }) => {
             <div className="mb-2">
               <CSVLink
                 className="btn btn-primary"
-                filename={"Attendace_"+eventName+"_Event.csv"}
+                filename={"Attendace_Event.csv"}
                 data={csvData}
               >
                 Export to CSV
