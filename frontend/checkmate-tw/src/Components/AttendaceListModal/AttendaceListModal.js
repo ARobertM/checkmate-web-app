@@ -1,27 +1,22 @@
-import React, { useState } from "react";
+import React from "react";
 import Modal from "react-bootstrap/Modal";
 import ModalFooter from "react-bootstrap/esm/ModalFooter";
-import axios from "axios";
+import { CSVLink } from "react-csv";
 
 const AttendanceListModal = ({ show, onClose, attendacelist }) => {
-  const handleExportData = async () => {
-    try {
-      const response = await axios.get(
-        "http://localhost:9000/api/export-scans",
-        {
-          responseType: "blob", // Important pentru a primi fișierul
-        }
-      );
-      const url = window.URL.createObjectURL(new Blob([response.data]));
-      const link = document.createElement("a");
-      link.href = url;
-      link.setAttribute("download", "Scans.csv");
-      document.body.appendChild(link);
-      link.click();
-    } catch (error) {
-      console.error("Eroare la exportul datelor:", error);
-    }
-  };
+  const csvData = [
+    ["FirstName", "LastName", "Email", "Date", "Hour"],
+    ...attendacelist.map(
+      ({ UserFirstName, UserLastName, UserEmail, AttendanceList }) => [
+        UserFirstName,
+        UserLastName,
+        UserEmail,
+        new Date(AttendanceList.AttendanceListCreateDate).toLocaleDateString(),
+        new Date(AttendanceList.AttendanceListCreateDate).toLocaleTimeString(),
+      ]
+    ),
+  ];
+
   return (
     <div>
       <Modal show={show} onHide={onClose}>
@@ -29,14 +24,9 @@ const AttendanceListModal = ({ show, onClose, attendacelist }) => {
           <div className="text-center">Attendance List</div>
         </Modal.Header>
         <Modal.Body className="text-center">
+          {attendacelist.length == 0 && <div>No data</div>}
           <div className="mt-3">
             {attendacelist.map((user) => {
-              let hour = new Date(
-                user.AttendanceList.AttendanceListCreateDate
-              ).getHours();
-              let minutes = new Date(
-                user.AttendanceList.AttendanceListCreateDate
-              ).getMinutes();
               return (
                 <div key={user.UserId} className="card mb-2 event-card">
                   <div className="card-body p-2">
@@ -49,7 +39,11 @@ const AttendanceListModal = ({ show, onClose, attendacelist }) => {
                           user.AttendanceList.AttendanceListCreateDate
                         ).toDateString()}
                       </div>
-                      <div className="col-3 mb-2">{hour + ":" + minutes}</div>
+                      <div className="col-3 mb-2">
+                        {new Date(
+                          user.AttendanceList.AttendanceListCreateDate
+                        ).toLocaleTimeString()}
+                      </div>
                     </div>
                   </div>
                 </div>
@@ -59,12 +53,13 @@ const AttendanceListModal = ({ show, onClose, attendacelist }) => {
         </Modal.Body>
         <ModalFooter>
           <div className="mb-2">
-            <button
-              className="btn btn-sm btn-outline-secondary"
-              onClick={() => handleExportData()}
+            <CSVLink
+              className="btn btn-primary"
+              filename="Attendace.csv"
+              data={csvData}
             >
-              Export
-            </button>
+              Export to CSV
+            </CSVLink>
           </div>
         </ModalFooter>
       </Modal>
